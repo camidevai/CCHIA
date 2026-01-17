@@ -91,7 +91,7 @@ const Footer = () => {
                 alt="CCHIA Logo"
                 className="h-12 w-auto"
               />
-              <span className="text-2xl font-bold text-accent">CCHIA</span>
+              <span className="text-2xl font-bold text-accent"></span>
             </div>
             <p className="text-light-text-secondary dark:text-dark-text-secondary mb-6 max-w-md">
               Cámara Chilena de Inteligencia Artificial - Impulsando la IA en Chile a través de la colaboración, innovación y educación.
