@@ -1,7 +1,23 @@
 import { motion } from 'framer-motion';
+import { useNavbar } from '../contexts/NavbarContext';
+import { useState, useEffect } from 'react';
 
 const Footer = () => {
+  const { isNavExpanded } = useNavbar();
   const currentYear = new Date().getFullYear();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const paddingLeft = isMobile ? '0' : (isNavExpanded ? '200px' : '80px');
 
   const socialLinks = [
     {
@@ -80,7 +96,10 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-light-bg-secondary dark:bg-dark-bg-secondary border-t border-light-border-primary dark:border-dark-border-primary md:pl-[200px] transition-all duration-300">
+    <footer
+      className="bg-light-bg-secondary dark:bg-dark-bg-secondary border-t border-light-border-primary dark:border-dark-border-primary transition-all duration-300"
+      style={{ paddingLeft }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-8">
           {/* Brand Section */}

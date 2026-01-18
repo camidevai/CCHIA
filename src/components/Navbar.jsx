@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
+import { useNavbar } from '../contexts/NavbarContext';
 import ThemeToggle from './ThemeToggle';
 
 // Icon Components - Material Design Style
@@ -44,7 +45,7 @@ const ContactIcon = () => (
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isNavExpanded, setIsNavExpanded] = useState(true);
+  const { isNavExpanded, toggleNav } = useNavbar();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,7 +102,7 @@ const Navbar = () => {
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
-            onClick={() => setIsNavExpanded(!isNavExpanded)}
+            onClick={toggleNav}
             className="absolute -right-4 top-8 w-8 h-8 rounded-full bg-accent shadow-lg flex items-center justify-center text-white hover:shadow-xl transition-shadow z-10"
             aria-label={isNavExpanded ? 'Colapsar menú' : 'Expandir menú'}
           >
