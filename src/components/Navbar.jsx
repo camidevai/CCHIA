@@ -60,7 +60,7 @@ const Navbar = () => {
               className="flex items-center space-x-3"
             >
               <img
-                src="/imagenes/logoCchia.png"
+                src="/imagenes/logoCchia2.png"
                 alt="CCHIA Logo"
                 className="h-12 w-auto"
               />

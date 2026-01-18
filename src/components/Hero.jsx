@@ -96,7 +96,7 @@ const Hero = () => {
             className="text-center lg:text-left"
           >
             <motion.div variants={itemVariants} className="mb-6">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-6xl font-bold mb-4">
                 <span className="block text-light-text-primary dark:text-dark-text-primary">
                   Cámara Chilena de
                 </span>
