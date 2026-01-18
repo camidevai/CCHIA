@@ -39,9 +39,9 @@ const AppContent = () => {
           style={{ paddingLeft }}
         >
           <Hero />
-          <InfiniteCarousel />
           <Mission />
           <Benefits />
+          <InfiniteCarousel />
           <CallToAction />
         </main>
 

@@ -1,0 +1,51 @@
+{
+  "sectionTitle": "Únete a CCHIA",
+  "sectionSubtitle": "Forma parte de la comunidad líder en Inteligencia Artificial de Chile",
+  "form": {
+    "title": "Contáctanos",
+    "fields": {
+      "name": {
+        "label": "Nombre completo",
+        "placeholder": "Tu nombre",
+        "required": true
+      },
+      "email": {
+        "label": "Email",
+        "placeholder": "tu@email.com",
+        "required": true
+      },
+      "organization": {
+        "label": "Organización",
+        "placeholder": "Nombre de tu empresa o institución",
+        "required": false
+      },
+      "message": {
+        "label": "Mensaje",
+        "placeholder": "Cuéntanos cómo quieres participar en CCHIA",
+        "required": true
+      }
+    },
+    "submitButton": "Enviar mensaje",
+    "successMessage": {
+      "title": "¡Mensaje enviado con éxito!",
+      "subtitle": "Nos pondremos en contacto contigo pronto."
+    }
+  },
+  "whyJoin": {
+    "title": "¿Por qué unirte?",
+    "reasons": [
+      "Conecta con líderes y expertos en IA",
+      "Accede a recursos exclusivos y capacitaciones",
+      "Participa en eventos y conferencias",
+      "Impulsa tu carrera o negocio en IA",
+      "Contribuye al desarrollo de la IA en Chile"
+    ]
+  },
+  "contactInfo": {
+    "title": "Información de contacto",
+    "email": "contacto@cchia.cl",
+    "location": "Santiago, Chile",
+    "website": "www.cchia.cl"
+  }
+}
+

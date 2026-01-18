@@ -3,40 +3,42 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 import { useNavbar } from '../contexts/NavbarContext';
 import ThemeToggle from './ThemeToggle';
+import navigationData from '../data/navigation.json';
+import siteData from '../data/site.json';
 
-// Icon Components - Material Design Style
+// Icon Components - Material Design Style with CCHIA Teal (#1FB6A6)
 const HomeIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-6 h-6">
-    <path fill="#00bcd4" d="M24,4L6,18v24h12V28h12v14h12V18L24,4z"/>
+    <path fill="#1FB6A6" d="M24,4L6,18v24h12V28h12v14h12V18L24,4z"/>
   </svg>
 );
 
 const VisionIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-6 h-6">
-    <path fill="#00bcd4" d="M24,8C12,8,2,18,2,24s10,16,22,16s22-10,22-16S36,8,24,8z M24,34c-5.5,0-10-4.5-10-10s4.5-10,10-10s10,4.5,10,10S29.5,34,24,34z"/>
-    <circle fill="#00bcd4" cx="24" cy="24" r="6"/>
+    <path fill="#1FB6A6" d="M24,8C12,8,2,18,2,24s10,16,22,16s22-10,22-16S36,8,24,8z M24,34c-5.5,0-10-4.5-10-10s4.5-10,10-10s10,4.5,10,10S29.5,34,24,34z"/>
+    <circle fill="#1FB6A6" cx="24" cy="24" r="6"/>
   </svg>
 );
 
 const BenefitsIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-6 h-6">
-    <path fill="#00bcd4" d="M24,4l-6,6l-8-2l2,8l-6,6l6,6l-2,8l8-2l6,6l6-6l8,2l-2-8l6-6l-6-6l2-8l-8,2L24,4z"/>
+    <path fill="#1FB6A6" d="M24,4l-6,6l-8-2l2,8l-6,6l6,6l-2,8l8-2l6,6l6-6l8,2l-2-8l6-6l-6-6l2-8l-8,2L24,4z"/>
     <circle fill="#fff" cx="24" cy="24" r="6"/>
   </svg>
 );
 
 const JoinIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-6 h-6">
-    <circle fill="#00bcd4" cx="18" cy="16" r="8"/>
-    <circle fill="#00bcd4" cx="30" cy="16" r="8"/>
-    <path fill="#00bcd4" d="M18,26c-6.6,0-12,5.4-12,12v6h24v-6C30,31.4,24.6,26,18,26z"/>
-    <path fill="#00bcd4" d="M30,26c-1.4,0-2.7,0.2-4,0.6c3.4,2.3,5.6,6.2,5.6,10.6V44h16v-6C47.6,31.4,36.6,26,30,26z"/>
+    <circle fill="#1FB6A6" cx="18" cy="16" r="8"/>
+    <circle fill="#1FB6A6" cx="30" cy="16" r="8"/>
+    <path fill="#1FB6A6" d="M18,26c-6.6,0-12,5.4-12,12v6h24v-6C30,31.4,24.6,26,18,26z"/>
+    <path fill="#1FB6A6" d="M30,26c-1.4,0-2.7,0.2-4,0.6c3.4,2.3,5.6,6.2,5.6,10.6V44h16v-6C47.6,31.4,36.6,26,30,26z"/>
   </svg>
 );
 
 const ContactIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-6 h-6">
-    <path fill="#00bcd4" d="M40,8H8C5.8,8,4,9.8,4,12v24c0,2.2,1.8,4,4,4h32c2.2,0,4-1.8,4-4V12C44,9.8,42.2,8,40,8z"/>
+    <path fill="#1FB6A6" d="M40,8H8C5.8,8,4,9.8,4,12v24c0,2.2,1.8,4,4,4h32c2.2,0,4-1.8,4-4V12C44,9.8,42.2,8,40,8z"/>
     <path fill="#fff" d="M24,26L8,16h32L24,26z"/>
     <path fill="#fff" d="M24,30l-16-10v16h32V20L24,30z"/>
   </svg>
@@ -46,6 +48,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isNavExpanded, toggleNav } = useNavbar();
+  const { theme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -56,13 +59,8 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Inicio', href: '#inicio' },
-    { name: 'Nuestra Visión', href: '#vision' },
-    { name: 'Beneficios', href: '#beneficios' },
-    { name: 'Únete', href: '#unete' },
-    { name: 'Contacto', href: '#contacto' },
-  ];
+  // Obtener datos de navegación desde JSON
+  const { navLinks } = navigationData;
 
   const handleNavClick = (e, href) => {
     e.preventDefault();
@@ -124,9 +122,9 @@ const Navbar = () => {
             className="flex items-center justify-center mb-8"
           >
             <img
-              src="/imagenes/logoCchia2.png"
-              alt="CCHIA Logo"
-              className={`object-contain transition-all duration-300 ${isNavExpanded ? 'h-16 w-16' : 'h-12 w-12'}`}
+              src={theme === 'dark' ? siteData.logo.dark : siteData.logo.light}
+              alt={siteData.siteName}
+              className={`object-contain transition-all duration-300 ${isNavExpanded ? 'h-24 w-24' : 'h-12 w-12'}`}
             />
           </motion.div>
 
@@ -216,9 +214,9 @@ const Navbar = () => {
               className="flex items-center space-x-3"
             >
               <img
-                src="/imagenes/logoCchia2.png"
-                alt="CCHIA Logo"
-                className="h-12 w-auto"
+                src={theme === 'dark' ? siteData.logo.dark : siteData.logo.light}
+                alt={siteData.siteName}
+                className="h-12 w-auto transition-all duration-300"
               />
             </motion.div>
 

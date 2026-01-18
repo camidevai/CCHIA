@@ -1,0 +1,90 @@
+{
+  "brand": {
+    "logo": {
+      "light": "/imagenes/logoCchia2.png",
+      "dark": "/imagenes/logoCchia2.png",
+      "alt": "CCHIA Logo"
+    },
+    "description": "Cámara Chilena de Inteligencia Artificial - Impulsando la IA en Chile a través de la colaboración, innovación y educación."
+  },
+  "socialLinks": [
+    {
+      "name": "LinkedIn",
+      "href": "#",
+      "icon": "linkedin"
+    },
+    {
+      "name": "Twitter",
+      "href": "#",
+      "icon": "twitter"
+    },
+    {
+      "name": "GitHub",
+      "href": "#",
+      "icon": "github"
+    }
+  ],
+  "footerLinks": [
+    {
+      "title": "Navegación",
+      "links": [
+        {
+          "name": "Inicio",
+          "href": "#inicio"
+        },
+        {
+          "name": "Nuestra Visión",
+          "href": "#vision"
+        },
+        {
+          "name": "Beneficios",
+          "href": "#beneficios"
+        },
+        {
+          "name": "Únete",
+          "href": "#unete"
+        }
+      ]
+    },
+    {
+      "title": "Recursos",
+      "links": [
+        {
+          "name": "Eventos",
+          "href": "#"
+        },
+        {
+          "name": "Blog",
+          "href": "#"
+        },
+        {
+          "name": "Documentación",
+          "href": "#"
+        },
+        {
+          "name": "FAQ",
+          "href": "#"
+        }
+      ]
+    },
+    {
+      "title": "Legal",
+      "links": [
+        {
+          "name": "Términos de Uso",
+          "href": "#"
+        },
+        {
+          "name": "Política de Privacidad",
+          "href": "#"
+        },
+        {
+          "name": "Código de Conducta",
+          "href": "#"
+        }
+      ]
+    }
+  ],
+  "copyright": "© {year} CCHIA - Cámara Chilena de Inteligencia Artificial. Todos los derechos reservados."
+}
+

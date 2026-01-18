@@ -1,8 +1,11 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useTheme } from '../contexts/ThemeContext';
 import MatrixBackground from './MatrixBackground';
+import heroData from '../data/hero.json';
 
 const Hero = () => {
+  const { theme } = useTheme();
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -99,10 +102,10 @@ const Hero = () => {
             <motion.div variants={itemVariants} className="mb-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-6xl font-bold mb-4">
                 <span className="block text-light-text-primary dark:text-dark-text-primary">
-                  Cámara Chilena de
+                  {heroData.title.line1}
                 </span>
                 <span className="block text-accent glow-text mt-2">
-                  Inteligencia Artificial
+                  {heroData.title.line2}
                 </span>
               </h1>
             </motion.div>
@@ -111,14 +114,14 @@ const Hero = () => {
               variants={itemVariants}
               className="text-xl sm:text-2xl lg:text-3xl text-light-text-secondary dark:text-dark-text-secondary mb-6"
             >
-              Impulsando la Inteligencia Artificial en Chile.
+              {heroData.subtitle}
             </motion.p>
 
             <motion.p
               variants={itemVariants}
               className="text-base sm:text-lg text-light-text-tertiary dark:text-dark-text-tertiary mb-8"
             >
-              Únete a la organización líder en IA de Chile. Conecta, innova y transforma el futuro con nosotros.
+              {heroData.description}
             </motion.p>
 
             {/* CTA Buttons */}
@@ -132,7 +135,7 @@ const Hero = () => {
                 onClick={handleScrollToContact}
                 className="w-full sm:w-auto px-8 py-4 bg-accent text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 dark:shadow-accent/50"
               >
-                ¡Contáctanos hoy!
+                {heroData.cta.primary}
               </motion.button>
 
               <motion.button
@@ -141,7 +144,7 @@ const Hero = () => {
                 onClick={handleScrollToVision}
                 className="w-full sm:w-auto px-8 py-4 bg-transparent border-2 border-accent text-accent rounded-lg font-semibold text-lg hover:bg-accent hover:text-white transition-all duration-300"
               >
-                Conoce Más
+                {heroData.cta.secondary}
               </motion.button>
             </motion.div>
 
@@ -173,8 +176,8 @@ const Hero = () => {
               className="relative z-10"
             >
               <motion.img
-                src="/imagenes/mascota/mascotaDeLado.png"
-                alt="CCHIA Mascot"
+                src={heroData.mascot.image}
+                alt={heroData.mascot.alt}
                 className="w-80 h-80 sm:w-[28rem] sm:h-[28rem] lg:w-[36rem] lg:h-[36rem] xl:w-[42rem] xl:h-[42rem] object-contain drop-shadow-2xl"
                 whileHover={{ scale: 1.05, rotate: 5 }}
                 transition={{ duration: 0.3 }}

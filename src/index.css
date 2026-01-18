@@ -2,9 +2,108 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom CSS Variables for Theme */
+/* ============================================
+   CCHIA THEME SYSTEM - CSS Variables
+   Based on institutional brand identity
+   ============================================ */
+
 :root {
+  /* Transition */
   --transition-duration: 300ms;
+  --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* LIGHT THEME - Professional & Institutional */
+  --bg-main: #FFFFFF;
+  --bg-soft: #F2F4F8;
+  --bg-tertiary: #E8EDF5;
+
+  --primary: #0A2A66;
+  --primary-hover: #082152;
+  --primary-active: #061838;
+
+  --secondary: #1FB6A6;
+  --secondary-hover: #17A89A;
+  --secondary-light: #4EE3D3;
+
+  --text-main: #0A2A66;        /* Azul institucional principal (sin negro) */
+  --text-muted: #4A5F8A;        /* Azul grisáceo medio */
+  --text-light: #7A8FB8;        /* Azul grisáceo claro */
+
+  --border: #D9DEE8;
+  --border-subtle: #E8EDF5;
+
+  --button-primary-bg: #0A2A66;
+  --button-primary-text: #FFFFFF;
+  --button-primary-hover: #082152;
+
+  --button-secondary-bg: #1FB6A6;
+  --button-secondary-text: #FFFFFF;
+  --button-secondary-hover: #17A89A;
+
+  --link: #1FB6A6;
+  --link-hover: #17A89A;
+
+  --shadow-sm: 0 1px 2px 0 rgba(10, 42, 102, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(10, 42, 102, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(10, 42, 102, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(10, 42, 102, 0.1);
+
+  /* Typography */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Space Grotesk', 'Inter', sans-serif;
+
+  /* Spacing scale */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  /* Border radius */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+}
+
+/* DARK THEME - Futuristic & Tech Authority */
+.dark {
+  --bg-main: #081C45;
+  --bg-soft: #0A2A66;
+  --bg-tertiary: #0D3380;
+
+  --primary: #1FB6A6;
+  --primary-hover: #4EE3D3;
+  --primary-active: #17A89A;
+
+  --secondary: #4EE3D3;
+  --secondary-hover: #6EEEE0;
+  --secondary-light: #8FF5EA;
+
+  --text-main: #E5EAF3;
+  --text-muted: #AAB4C8;
+  --text-light: #8B95A8;
+
+  --border: #1E3A8A;
+  --border-subtle: #1A3470;
+
+  --button-primary-bg: #1FB6A6;
+  --button-primary-text: #081C45;
+  --button-primary-hover: #4EE3D3;
+
+  --button-secondary-bg: #0A2A66;
+  --button-secondary-text: #FFFFFF;
+  --button-secondary-hover: #0D3380;
+
+  --link: #4EE3D3;
+  --link-hover: #6EEEE0;
+
+  --shadow-sm: 0 1px 2px 0 rgba(31, 182, 166, 0.1);
+  --shadow-md: 0 4px 6px -1px rgba(31, 182, 166, 0.15);
+  --shadow-lg: 0 10px 15px -3px rgba(31, 182, 166, 0.2);
+  --shadow-xl: 0 20px 25px -5px rgba(31, 182, 166, 0.25);
 }
 
 /* Smooth transitions for theme changes */
@@ -24,23 +123,9 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar for dark mode */
-.dark ::-webkit-scrollbar {
-  width: 10px;
-}
-
-.dark ::-webkit-scrollbar-track {
-  background: #1e293b;
-}
-
-.dark ::-webkit-scrollbar-thumb {
-  background: rgba(0, 188, 212, 0.3);
-  border-radius: 5px;
-}
-
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 188, 212, 0.5);
-}
+/* ============================================
+   CUSTOM SCROLLBAR - CCHIA Theme
+   ============================================ */
 
 /* Light mode scrollbar */
 ::-webkit-scrollbar {
@@ -48,16 +133,149 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--bg-soft);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
-  border-radius: 5px;
+  background: var(--border);
+  border-radius: var(--radius-md);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: var(--primary);
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar {
+  width: 10px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: var(--bg-soft);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(31, 182, 166, 0.3);
+  border-radius: var(--radius-md);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(31, 182, 166, 0.6);
+}
+
+/* React Slick Custom Styles - Dots Mejorados */
+.mission-slider .slick-dots {
+  bottom: -60px;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  list-style: none;
+  padding: 12px 24px;
+  margin: 0;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border-radius: 50px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(31, 182, 166, 0.1);
+}
+
+.dark .mission-slider .slick-dots {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(31, 182, 166, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.mission-slider .slick-dots li {
+  margin: 0;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+}
+
+.mission-slider .slick-dots li button {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--border);
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.43, 0.13, 0.23, 0.96);
+  font-size: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.mission-slider .slick-dots li button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--secondary);
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.4s cubic-bezier(0.43, 0.13, 0.23, 0.96);
+}
+
+.mission-slider .slick-dots li button:hover {
+  background: var(--secondary-light);
+  border-color: var(--secondary);
+  transform: scale(1.3);
+  box-shadow: 0 0 12px rgba(31, 182, 166, 0.4);
+}
+
+.mission-slider .slick-dots li button:hover::before {
+  opacity: 0.3;
+  transform: scale(1);
+}
+
+.mission-slider .slick-dots li.slick-active button {
+  width: 40px;
+  height: 8px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, var(--secondary) 0%, var(--secondary-light) 100%);
+  border-color: var(--secondary);
+  box-shadow: 0 0 20px rgba(31, 182, 166, 0.6), 0 0 40px rgba(31, 182, 166, 0.3);
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.mission-slider .slick-dots li.slick-active button::before {
+  opacity: 0.5;
+  transform: scale(1);
+  border-radius: 9999px;
+}
+
+@keyframes pulse-dot {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(31, 182, 166, 0.6), 0 0 40px rgba(31, 182, 166, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(31, 182, 166, 0.8), 0 0 50px rgba(31, 182, 166, 0.4);
+  }
+}
+
+.mission-slider .slick-slide {
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.mission-slider .slick-slide.slick-active {
+  opacity: 1;
+}
+
+.mission-slider .slick-list {
+  overflow: hidden;
+  margin: 0 -8px;
+}
+
+.mission-slider .slick-track {
+  display: flex;
+  align-items: center;
 }
 
 /* Respect reduced motion preference */
@@ -87,34 +305,109 @@ body {
 
 /* Focus styles for accessibility */
 *:focus-visible {
-  outline: 2px solid #00bcd4;
+  outline: 2px solid var(--secondary);
   outline-offset: 2px;
+  border-radius: var(--radius-sm);
 }
 
-/* Utility classes */
+/* ============================================
+   UTILITY CLASSES - CCHIA Theme
+   ============================================ */
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-  
+
+  /* Glow effects with CCHIA teal */
   .glow-text {
-    text-shadow: 0 0 10px rgba(0, 188, 212, 0.5);
+    text-shadow: 0 0 10px rgba(31, 182, 166, 0.5);
   }
-  
+
   .dark .glow-text {
-    text-shadow: 0 0 20px rgba(0, 188, 212, 0.8);
+    text-shadow: 0 0 20px rgba(78, 227, 211, 0.8);
   }
-  
+
+  .glow-text-strong {
+    text-shadow: 0 0 20px rgba(31, 182, 166, 0.8),
+                 0 0 40px rgba(31, 182, 166, 0.4);
+  }
+
+  .dark .glow-text-strong {
+    text-shadow: 0 0 30px rgba(78, 227, 211, 1),
+                 0 0 60px rgba(78, 227, 211, 0.6);
+  }
+
+  /* Glass morphism effect */
   .glass-effect {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(10, 42, 102, 0.1);
   }
-  
+
   .dark .glass-effect {
-    background: rgba(15, 23, 42, 0.6);
+    background: rgba(8, 28, 69, 0.6);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(0, 188, 212, 0.2);
+    border: 1px solid rgba(31, 182, 166, 0.2);
+  }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    background: linear-gradient(135deg, #0A2A66 0%, #0D3380 100%);
+  }
+
+  .gradient-secondary {
+    background: linear-gradient(135deg, #1FB6A6 0%, #4EE3D3 100%);
+  }
+
+  .gradient-accent {
+    background: linear-gradient(135deg, #1FB6A6 0%, #0A2A66 100%);
+  }
+
+  /* Button styles */
+  .btn-primary {
+    background: var(--button-primary-bg);
+    color: var(--button-primary-text);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    transition: all var(--transition-duration) var(--transition-timing);
+  }
+
+  .btn-primary:hover {
+    background: var(--button-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .btn-secondary {
+    background: var(--button-secondary-bg);
+    color: var(--button-secondary-text);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-lg);
+    font-weight: 600;
+    transition: all var(--transition-duration) var(--transition-timing);
+  }
+
+  .btn-secondary:hover {
+    background: var(--button-secondary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Card styles */
+  .card {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    transition: all var(--transition-duration) var(--transition-timing);
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-4px);
   }
 }
 

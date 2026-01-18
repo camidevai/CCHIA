@@ -1,5 +1,10 @@
 ﻿import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import { useRef } from 'react';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import objectivesData from '../data/objectives.json';
 
 const Mission = () => {
   const [ref, inView] = useInView({
@@ -7,54 +12,33 @@ const Mission = () => {
     threshold: 0.1,
   });
 
-  const objectives = [
-    {
-      icon: '🌐',
-      title: 'Red de Aprendizaje Colectivo',
-      description: 'Constituir una red amplia de miembros activos entre personas naturales, consultores, startups, investigadores, estudiantes, pymes, organismos públicos y empresas para intercambiar conocimiento en IA.',
-    },
-    {
-      icon: '💻',
-      title: 'Plataforma Digital',
-      description: 'Desarrollar una plataforma de colaboración para miembros, que integre un directorio de talento, un mapa de necesidades sectoriales y un repositorio de recursos, con el objetivo de conectar el ecosistema de IA en Chile.',
-    },
-    {
-      icon: '📚',
-      title: 'Capacitación y Sensibilización',
-      description: 'Implementar programas de capacitación y sensibilización que fomenten la comprensión de la IA ética e inclusiva entre diversos públicos, catalizando proyectos con impacto social.',
-    },
-    {
-      icon: '🤝',
-      title: 'Alianzas Estratégicas',
-      description: 'Formalizar alianzas estratégicas con organizaciones de IA en Latinoamérica y desarrollar una Red Global de Talento Chileno en IA, fomentando la colaboración y el intercambio de conocimiento a escala regional.',
-    },
-  ];
+  const sliderRef = useRef(null);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
-    },
+  // Obtener datos de objetivos desde JSON
+  const { sectionTitle, sectionSubtitle, objectives } = objectivesData;
+
+  // Configuración de React Slick
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 600, // Más rápido (antes 800ms)
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 8000,
+    fade: true,
+    cssEase: 'cubic-bezier(0.43, 0.13, 0.23, 0.96)',
+    pauseOnHover: true,
+    arrows: false,
+    dotsClass: 'slick-dots custom-dots',
   };
 
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut',
-      },
-    },
-  };
+
 
   return (
-    <section id="vision" className="py-20 bg-light-bg-secondary dark:bg-dark-bg-secondary">
+    <section id="vision" className="py-20 bg-light-bg-secondary dark:bg-dark-bg-secondary overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -63,46 +47,98 @@ const Mission = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-light-text-primary dark:text-dark-text-primary mb-4">
-            Nuestros Objetivos
+            {sectionTitle}
           </h2>
           <p className="text-xl text-light-text-secondary dark:text-dark-text-secondary max-w-3xl mx-auto">
-            Para Impulsar el Futuro de la Inteligencia Artificial en Chile
+            {sectionSubtitle}
           </p>
-          <p className="text-lg text-light-text-tertiary dark:text-dark-text-tertiary mt-4 max-w-4xl mx-auto">
-            Trabajamos con una visión clara y objetivos ambiciosos para transformar el ecosistema de inteligencia artificial en Chile y posicionarnos como referente regional.
-          </p>
+          <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mt-6" />
         </motion.div>
 
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={inView ? 'visible' : 'hidden'}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          {objectives.map((objective, index) => (
-            <motion.div
-              key={index}
-              variants={itemVariants}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className="group relative p-8 bg-light-bg-primary dark:bg-dark-bg-primary rounded-2xl shadow-lg border-2 border-light-border-primary dark:border-dark-border-primary hover:border-accent dark:hover:border-accent transition-all duration-300 overflow-hidden"
-            >
-              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-accent to-accent/50 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
-              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              <div className="relative z-10">
-                <div className="inline-flex items-center justify-center w-16 h-16 mb-5 rounded-xl bg-accent/10 text-4xl">
-                  {objective.icon}
+        {/* Carousel Container - React Slick */}
+        <div className="relative bg-light-bg-primary dark:bg-dark-bg-primary rounded-3xl shadow-2xl p-8 lg:p-12 mission-slider">
+          <Slider ref={sliderRef} {...settings}>
+            {objectives.map((objective, index) => (
+              <div key={index}>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                  {/* Image Column - Página Izquierda */}
+                  <div className="relative group">
+                    <div
+                      className="relative overflow-hidden rounded-2xl shadow-2xl"
+                    >
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-accent/20 via-transparent to-accent/10 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+
+                      {/* Image */}
+                      <img
+                        src={objective.image}
+                        alt={objective.title}
+                        className="w-full h-[400px] lg:h-[500px] object-cover transform group-hover:scale-105 transition-transform duration-700"
+                      />
+
+                      {/* Border Glow */}
+                      <div className="absolute inset-0 border-4 border-accent/0 group-hover:border-accent/50 rounded-2xl transition-all duration-500" />
+                    </div>
+
+                    {/* Decorative Elements */}
+                    <div className="absolute -top-4 -left-4 w-24 h-24 bg-accent/20 rounded-full blur-2xl" />
+                    <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-accent/10 rounded-full blur-3xl" />
+                  </div>
+
+                  {/* Description Column - Página Derecha */}
+                  <div className="relative">
+                    {/* Slide Number */}
+                    <div className="inline-block mb-4">
+                      <span className="text-6xl font-bold text-accent/20">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-light-text-primary dark:text-dark-text-primary mb-6 leading-tight">
+                      {objective.title}
+                    </h3>
+
+                    {/* Accent Line */}
+                    <div className="w-20 h-1.5 bg-gradient-to-r from-accent to-accent/50 mb-6" />
+
+                    {/* Description */}
+                    <p className="text-lg sm:text-xl text-light-text-secondary dark:text-dark-text-secondary leading-relaxed mb-8">
+                      {objective.description}
+                    </p>
+
+                    {/* Navigation Arrows */}
+                    <div className="flex gap-4">
+                      <motion.button
+                        whileHover={{ scale: 1.1, x: -5 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => sliderRef.current?.slickPrev()}
+                        className="w-14 h-14 rounded-full bg-light-bg-primary dark:bg-dark-bg-primary border-2 border-accent hover:bg-accent hover:text-white transition-all duration-300 flex items-center justify-center shadow-lg group"
+                        aria-label="Anterior"
+                      >
+                        <svg className="w-6 h-6 text-accent group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        </svg>
+                      </motion.button>
+
+                      <motion.button
+                        whileHover={{ scale: 1.1, x: 5 }}
+                        whileTap={{ scale: 0.9 }}
+                        onClick={() => sliderRef.current?.slickNext()}
+                        className="w-14 h-14 rounded-full bg-light-bg-primary dark:bg-dark-bg-primary border-2 border-accent hover:bg-accent hover:text-white transition-all duration-300 flex items-center justify-center shadow-lg group"
+                        aria-label="Siguiente"
+                      >
+                        <svg className="w-6 h-6 text-accent group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        </svg>
+                      </motion.button>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-4 group-hover:text-accent transition-colors duration-300">
-                  {objective.title}
-                </h3>
-                <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                  {objective.description}
-                </p>
               </div>
-              <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </motion.div>
-          ))}
-        </motion.div>
+            ))}
+          </Slider>
+        </div>
       </div>
     </section>
   );

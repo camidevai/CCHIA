@@ -1,0 +1,39 @@
+{
+  "sectionTitle": "Beneficios",
+  "sectionSubtitle": "Únete a la Cámara y accede a beneficios exclusivos",
+  "sectionDescription": "Descubre cómo ser parte de CCHIA puede impulsar tu carrera o negocio en el campo de la Inteligencia Artificial",
+  "benefits": [
+    {
+      "icon": "networking",
+      "title": "Networking",
+      "description": "Accede a una red de expertos en IA de diferentes sectores"
+    },
+    {
+      "icon": "events",
+      "title": "Eventos Exclusivos",
+      "description": "Participa en conferencias, talleres y meetups sobre IA"
+    },
+    {
+      "icon": "resources",
+      "title": "Recursos",
+      "description": "Accede a herramientas, datasets y documentación especializada"
+    },
+    {
+      "icon": "training",
+      "title": "Capacitación",
+      "description": "Programas de formación continua en las últimas tecnologías de IA"
+    },
+    {
+      "icon": "collaboration",
+      "title": "Colaboración",
+      "description": "Trabaja en proyectos conjuntos con otros miembros y organizaciones"
+    },
+    {
+      "icon": "visibility",
+      "title": "Visibilidad",
+      "description": "Destaca tus proyectos y logros en la comunidad nacional e internacional de IA"
+    }
+  ],
+  "additionalInfo": "Red de colaboración y networking • Acceso a eventos y recursos exclusivos • Visibilidad y crecimiento para tu organización"
+}
+

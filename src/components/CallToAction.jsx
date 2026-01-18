@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import contactData from '../data/contact.json';
 
 const CallToAction = () => {
   const [ref, inView] = useInView({
@@ -53,10 +54,10 @@ const CallToAction = () => {
           className="text-center mb-12"
         >
           <h2 className="text-4xl sm:text-5xl font-bold text-light-text-primary dark:text-dark-text-primary mb-4">
-            Únete a CCHIA
+            {contactData.sectionTitle}
           </h2>
           <p className="text-xl text-light-text-secondary dark:text-dark-text-secondary max-w-3xl mx-auto">
-            Forma parte de la comunidad líder en Inteligencia Artificial de Chile
+            {contactData.sectionSubtitle}
           </p>
         </motion.div>
 
@@ -70,7 +71,7 @@ const CallToAction = () => {
             className="bg-light-bg-primary dark:bg-dark-bg-primary p-8 rounded-xl shadow-lg border border-light-border-primary dark:border-dark-border-primary"
           >
             <h3 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-6">
-              Contáctanos
+              {contactData.form.title}
             </h3>
 
             {isSubmitted ? (
@@ -81,49 +82,49 @@ const CallToAction = () => {
               >
                 <div className="text-6xl mb-4">✓</div>
                 <p className="text-xl text-accent font-semibold">
-                  ¡Mensaje enviado con éxito!
+                  {contactData.form.successMessage.title}
                 </p>
                 <p className="text-light-text-secondary dark:text-dark-text-secondary mt-2">
-                  Nos pondremos en contacto contigo pronto.
+                  {contactData.form.successMessage.subtitle}
                 </p>
               </motion.div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-light-text-primary dark:text-dark-text-primary mb-2">
-                    Nombre completo *
+                    {contactData.form.fields.name.label} {contactData.form.fields.name.required && '*'}
                   </label>
                   <input
                     type="text"
                     id="name"
                     name="name"
-                    required
+                    required={contactData.form.fields.name.required}
                     value={formData.name}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-border-primary dark:border-dark-border-primary text-light-text-primary dark:text-dark-text-primary focus:outline-none focus:ring-2 focus:ring-accent transition-all"
-                    placeholder="Tu nombre"
+                    placeholder={contactData.form.fields.name.placeholder}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-light-text-primary dark:text-dark-text-primary mb-2">
-                    Email *
+                    {contactData.form.fields.email.label} {contactData.form.fields.email.required && '*'}
                   </label>
                   <input
                     type="email"
                     id="email"
                     name="email"
-                    required
+                    required={contactData.form.fields.email.required}
                     value={formData.email}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-border-primary dark:border-dark-border-primary text-light-text-primary dark:text-dark-text-primary focus:outline-none focus:ring-2 focus:ring-accent transition-all"
-                    placeholder="tu@email.com"
+                    placeholder={contactData.form.fields.email.placeholder}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="organization" className="block text-sm font-medium text-light-text-primary dark:text-dark-text-primary mb-2">
-                    Organización
+                    {contactData.form.fields.organization.label}
                   </label>
                   <input
                     type="text"
@@ -132,23 +133,23 @@ const CallToAction = () => {
                     value={formData.organization}
                     onChange={handleChange}
                     className="w-full px-4 py-3 rounded-lg bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-border-primary dark:border-dark-border-primary text-light-text-primary dark:text-dark-text-primary focus:outline-none focus:ring-2 focus:ring-accent transition-all"
-                    placeholder="Tu empresa o institución"
+                    placeholder={contactData.form.fields.organization.placeholder}
                   />
                 </div>
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-light-text-primary dark:text-dark-text-primary mb-2">
-                    Mensaje *
+                    {contactData.form.fields.message.label} {contactData.form.fields.message.required && '*'}
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    required
+                    required={contactData.form.fields.message.required}
                     value={formData.message}
                     onChange={handleChange}
                     rows={4}
                     className="w-full px-4 py-3 rounded-lg bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-border-primary dark:border-dark-border-primary text-light-text-primary dark:text-dark-text-primary focus:outline-none focus:ring-2 focus:ring-accent transition-all resize-none"
-                    placeholder="Cuéntanos cómo quieres participar en CCHIA"
+                    placeholder={contactData.form.fields.message.placeholder}
                   />
                 </div>
 
@@ -158,7 +159,7 @@ const CallToAction = () => {
                   type="submit"
                   className="w-full px-8 py-4 bg-accent text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                 >
-                  Enviar mensaje
+                  {contactData.form.submitButton}
                 </motion.button>
               </form>
             )}
@@ -173,16 +174,10 @@ const CallToAction = () => {
           >
             <div className="bg-light-bg-primary dark:bg-dark-bg-primary p-8 rounded-xl shadow-lg border border-light-border-primary dark:border-dark-border-primary">
               <h3 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-4">
-                ¿Por qué unirte?
+                {contactData.whyJoin.title}
               </h3>
               <ul className="space-y-4">
-                {[
-                  'Conecta con líderes y expertos en IA',
-                  'Accede a recursos exclusivos y capacitaciones',
-                  'Participa en eventos y conferencias',
-                  'Impulsa tu carrera o negocio en IA',
-                  'Contribuye al desarrollo de la IA en Chile',
-                ].map((item, index) => (
+                {contactData.whyJoin.reasons.map((item, index) => (
                   <li key={index} className="flex items-start">
                     <span className="text-accent mr-3 text-xl">✓</span>
                     <span className="text-light-text-secondary dark:text-dark-text-secondary">
@@ -195,12 +190,12 @@ const CallToAction = () => {
 
             <div className="bg-gradient-to-br from-accent/10 to-accent/5 dark:from-accent/20 dark:to-accent/10 p-8 rounded-xl border border-accent/30">
               <h3 className="text-xl font-bold text-light-text-primary dark:text-dark-text-primary mb-4">
-                Información de contacto
+                {contactData.contactInfo.title}
               </h3>
               <div className="space-y-3 text-light-text-secondary dark:text-dark-text-secondary">
-                <p>📧 Email: contacto@cchia.cl</p>
-                <p>📍 Santiago, Chile</p>
-                <p>🌐 www.cchia.cl</p>
+                <p>📧 Email: {contactData.contactInfo.email}</p>
+                <p>📍 {contactData.contactInfo.location}</p>
+                <p>🌐 {contactData.contactInfo.website}</p>
               </div>
             </div>
           </motion.div>

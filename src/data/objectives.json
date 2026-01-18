@@ -1,0 +1,27 @@
+{
+  "sectionTitle": "Nuestros Objetivos",
+  "sectionSubtitle": "Para Impulsar el Futuro de la Inteligencia Artificial en Chile",
+  "objectives": [
+    {
+      "title": "Red de Aprendizaje Colectivo",
+      "description": "Constituir una red amplia de miembros activos entre personas naturales, consultores, startups, investigadores, estudiantes, pymes, organismos públicos y empresas para intercambiar conocimiento en IA.",
+      "image": "/imagenes/colaboradores/red.jpg"
+    },
+    {
+      "title": "Plataforma Digital",
+      "description": "Desarrollar una plataforma de colaboración para miembros, que integre un directorio de talento, un mapa de necesidades sectoriales y un repositorio de recursos, con el objetivo de conectar el ecosistema de IA en Chile.",
+      "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
+    },
+    {
+      "title": "Capacitación y Sensibilización",
+      "description": "Implementar programas de capacitación y sensibilización que fomenten la comprensión de la IA ética e inclusiva entre diversos públicos, catalizando proyectos con impacto social.",
+      "image": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop"
+    },
+    {
+      "title": "Alianzas Estratégicas",
+      "description": "Formalizar alianzas estratégicas con organizaciones de IA en Latinoamérica y desarrollar una Red Global de Talento Chileno en IA, fomentando la colaboración y el intercambio de conocimiento a escala regional.",
+      "image": "/imagenes/colaboradores/alizas.jpg"
+    }
+  ]
+}
+

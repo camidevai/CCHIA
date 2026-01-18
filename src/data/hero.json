@@ -1,0 +1,17 @@
+{
+  "title": {
+    "line1": "Cámara Chilena de",
+    "line2": "Inteligencia Artificial"
+  },
+  "subtitle": "Impulsando la Inteligencia Artificial en Chile.",
+  "description": "Únete a la organización líder en IA de Chile. Conecta, innova y transforma el futuro con nosotros.",
+  "cta": {
+    "primary": "¡Contáctanos hoy!",
+    "secondary": "Conoce más"
+  },
+  "mascot": {
+    "image": "/imagenes/mascota/mascotaDeLado.png",
+    "alt": "CCHIA Mascot"
+  }
+}
+

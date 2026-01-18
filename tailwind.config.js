@@ -8,46 +8,74 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Light mode colors
+        // CCHIA Brand Colors - Institutional Identity
+        brand: {
+          primary: '#0A2A66',      // Primary Blue - Institutional
+          secondary: '#1FB6A6',    // Secondary Teal - Innovation
+          'dark-blue': '#081C45',  // Dark Blue - Authority
+          'soft-gray': '#F2F4F8',  // Soft Gray - UI Background
+          'border-gray': '#D9DEE8', // Border Gray - Dividers
+          'teal-light': '#4EE3D3', // Light Teal - Dark mode accent
+        },
+
+        // Light Theme - Professional & Institutional
         light: {
           bg: {
-            primary: '#ffffff',
-            secondary: '#f8fafc',
-            tertiary: '#f1f5f9',
+            primary: '#FFFFFF',      // Main background
+            secondary: '#F2F4F8',    // Soft background
+            tertiary: '#E8EDF5',     // Alternative background
           },
           text: {
-            primary: '#1f2937',
-            secondary: '#6b7280',
-            tertiary: '#4b5563',
+            primary: '#0A2A66',      // Azul institucional principal (sin negro)
+            secondary: '#4A5F8A',    // Azul grisáceo medio
+            tertiary: '#7A8FB8',     // Azul grisáceo claro
           },
           border: {
-            primary: '#e5e7eb',
-            secondary: '#d1d5db',
+            primary: '#D9DEE8',      // Main borders
+            secondary: '#E8EDF5',    // Subtle borders
           }
         },
-        // Dark mode colors
+
+        // Dark Theme - Futuristic & Tech Authority
         dark: {
           bg: {
-            primary: '#0f172a',
-            secondary: '#1e293b',
-            tertiary: '#334155',
+            primary: '#081C45',      // Main dark background
+            secondary: '#0A2A66',    // Secondary dark background
+            tertiary: '#0D3380',     // Alternative dark background
           },
           text: {
-            primary: '#ffffff',
-            secondary: '#e5e7eb',
-            tertiary: '#d1d5db',
+            primary: '#E5EAF3',      // Main text
+            secondary: '#AAB4C8',    // Muted text
+            tertiary: '#8B95A8',     // Light text
           },
           border: {
-            primary: 'rgba(0, 188, 212, 0.2)',
-            secondary: 'rgba(0, 188, 212, 0.1)',
+            primary: '#1E3A8A',      // Main borders
+            secondary: '#1A3470',    // Subtle borders
           }
         },
-        // Accent color (consistent across themes)
+
+        // Accent Colors - Adaptive per theme
         accent: {
-          DEFAULT: '#00bcd4',
-          light: '#4dd0e1',
-          dark: '#0097a7',
-        }
+          DEFAULT: '#1FB6A6',        // Default accent (light mode)
+          light: '#4EE3D3',          // Light variant
+          dark: '#0D9488',           // Dark variant
+          hover: '#17A89A',          // Hover state
+        },
+
+        // Primary Action Colors
+        primary: {
+          DEFAULT: '#0A2A66',        // Light mode primary
+          hover: '#082152',          // Hover state
+          active: '#061838',         // Active state
+          light: '#0D3380',          // Light variant
+          dark: '#1FB6A6',           // Dark mode primary
+        },
+
+        // Semantic Colors
+        success: '#10B981',
+        warning: '#F59E0B',
+        error: '#EF4444',
+        info: '#3B82F6',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
