@@ -1,26 +1,31 @@
 [build]
   # Directory to change to before starting a build
   base = "."
-  
+
   # Directory that contains the deploy-ready HTML files and assets
   publish = "dist"
-  
+
   # Default build command
-  command = "npm run build"
+  command = "chmod +x netlify-build.sh && ./netlify-build.sh"
+
+# Build environment variables
+[build.environment]
+  NODE_VERSION = "20"
+  NPM_FLAGS = "--legacy-peer-deps"
 
 # Production context: all deploys from the main branch
 [context.production]
-  command = "npm run build"
+  command = "chmod +x netlify-build.sh && ./netlify-build.sh"
   publish = "dist"
 
 # Deploy Preview context: all deploys generated from a pull/merge request
 [context.deploy-preview]
-  command = "npm run build"
+  command = "chmod +x netlify-build.sh && ./netlify-build.sh"
   publish = "dist"
 
 # Branch deploy context: all deploys that are not from a pull/merge request
 [context.branch-deploy]
-  command = "npm run build"
+  command = "chmod +x netlify-build.sh && ./netlify-build.sh"
   publish = "dist"
 
 # Redirect rules for SPA (Single Page Application)
