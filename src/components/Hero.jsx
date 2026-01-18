@@ -75,16 +75,16 @@ const Hero = () => {
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+      className="relative  flex items-center justify-center overflow-hidden pt-20"
     >
       {/* Matrix Background - Visible in both light and dark modes */}
       <MatrixBackground />
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-light-bg-primary/50 to-light-bg-primary dark:via-dark-bg-primary/50 dark:to-dark-bg-primary z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-light-bg-primary/30 to-light-bg-primary dark:via-dark-bg-primary/50 dark:to-dark-bg-primary z-10" />
 
       {/* Content Container - Two Column Layout */}
-      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
           {/* Left Column - Text Content */}
@@ -95,6 +95,7 @@ const Hero = () => {
             animate={inView ? 'visible' : 'hidden'}
             className="text-center lg:text-left"
           >
+            {/* Title */}
             <motion.div variants={itemVariants} className="mb-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-6xl font-bold mb-4">
                 <span className="block text-light-text-primary dark:text-dark-text-primary">
@@ -144,20 +145,7 @@ const Hero = () => {
               </motion.button>
             </motion.div>
 
-            {/* Feature Pills */}
-            <motion.div
-              variants={itemVariants}
-              className="mt-12 flex flex-wrap justify-center lg:justify-start gap-3"
-            >
-              {['Eventos exclusivos', 'Networking', 'Capacitaciones'].map((feature) => (
-                <div
-                  key={feature}
-                  className="px-5 py-2 bg-light-bg-secondary dark:bg-dark-bg-secondary rounded-full text-sm font-medium border border-light-border-primary dark:border-dark-border-primary"
-                >
-                  {feature}
-                </div>
-              ))}
-            </motion.div>
+
           </motion.div>
 
           {/* Right Column - Mascot Image */}

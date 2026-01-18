@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 import { useState } from 'react';
 
-const ThemeToggle = () => {
+const ThemeToggle = ({ inline = false }) => {
   const { theme, toggleTheme, isDark } = useTheme();
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -11,7 +11,7 @@ const ThemeToggle = () => {
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
       transition={{ delay: 0.5 }}
-      className="fixed bottom-8 right-8 z-50"
+      className={inline ? "relative" : "fixed bottom-8 right-8 z-50 md:hidden"}
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
     >
@@ -32,7 +32,7 @@ const ThemeToggle = () => {
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={toggleTheme}
-        className="relative w-14 h-14 rounded-full bg-accent shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center group"
+        className={`relative ${inline ? 'w-12 h-12' : 'w-14 h-14'} rounded-full bg-accent shadow-lg hover:shadow-xl transition-shadow duration-300 flex items-center justify-center group`}
         aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
         aria-live="polite"
       >
