@@ -48,8 +48,8 @@ const Navbar = () => {
         animate={{ y: 0 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-light-bg-primary/95 dark:bg-dark-bg-primary/95 backdrop-blur-md shadow-lg'
-            : 'bg-transparent'
+            ? 'bg-white/95 backdrop-blur-md shadow-lg'
+            : 'bg-white/80 backdrop-blur-sm'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -74,7 +74,7 @@ const Navbar = () => {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className="text-light-text-secondary dark:text-dark-text-secondary hover:text-accent transition-colors duration-200 font-medium"
+                  className="text-gray-700 hover:text-accent transition-colors duration-200 font-medium"
                 >
                   {link.name}
                 </a>
@@ -84,7 +84,7 @@ const Navbar = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="md:hidden p-2 rounded-lg hover:bg-light-bg-secondary dark:hover:bg-dark-bg-secondary transition-colors"
+              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors text-gray-700"
               aria-label="Toggle menu"
             >
               <div className="w-6 h-5 flex flex-col justify-between">
@@ -103,7 +103,7 @@ const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden bg-light-bg-primary dark:bg-dark-bg-primary border-t border-light-border-primary dark:border-dark-border-primary"
+              className="md:hidden bg-white border-t border-gray-200"
             >
               <div className="px-4 py-4 space-y-3">
                 {navLinks.map((link) => (
@@ -111,7 +111,7 @@ const Navbar = () => {
                     key={link.name}
                     href={link.href}
                     onClick={(e) => handleNavClick(e, link.href)}
-                    className="block py-2 text-light-text-secondary dark:text-dark-text-secondary hover:text-accent transition-colors"
+                    className="block py-2 text-gray-700 hover:text-accent transition-colors"
                   >
                     {link.name}
                   </a>

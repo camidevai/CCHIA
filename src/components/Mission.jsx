@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+﻿import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 
 const Mission = () => {
@@ -35,18 +35,18 @@ const Mission = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.15,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { y: 50, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.5,
         ease: 'easeOut',
       },
     },
@@ -55,7 +55,6 @@ const Mission = () => {
   return (
     <section id="vision" className="py-20 bg-light-bg-secondary dark:bg-dark-bg-secondary">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
         <motion.div
           ref={ref}
           initial={{ opacity: 0, y: 30 }}
@@ -74,7 +73,6 @@ const Mission = () => {
           </p>
         </motion.div>
 
-        {/* Objectives Grid */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -85,61 +83,25 @@ const Mission = () => {
             <motion.div
               key={index}
               variants={itemVariants}
-              whileHover={{ scale: 1.03, y: -5 }}
-              className="p-8 bg-light-bg-primary dark:bg-dark-bg-primary rounded-xl shadow-lg border border-light-border-primary dark:border-dark-border-primary hover:shadow-2xl transition-all duration-300"
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="group relative p-8 bg-light-bg-primary dark:bg-dark-bg-primary rounded-2xl shadow-lg border-2 border-light-border-primary dark:border-dark-border-primary hover:border-accent dark:hover:border-accent transition-all duration-300 overflow-hidden"
             >
-              <div className="text-5xl mb-4">{objective.icon}</div>
-              <h3 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-4">
-                {objective.title}
-              </h3>
-              <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
-                {objective.description}
-              </p>
+              <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-gradient-to-b from-accent to-accent/50 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-300 origin-top" />
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="relative z-10">
+                <div className="inline-flex items-center justify-center w-16 h-16 mb-5 rounded-xl bg-accent/10 text-4xl">
+                  {objective.icon}
+                </div>
+                <h3 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-4 group-hover:text-accent transition-colors duration-300">
+                  {objective.title}
+                </h3>
+                <p className="text-light-text-secondary dark:text-dark-text-secondary leading-relaxed">
+                  {objective.description}
+                </p>
+              </div>
+              <div className="absolute top-0 right-0 w-24 h-24 bg-accent/5 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Mission Statement */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-20 text-center"
-        >
-          <h3 className="text-3xl font-bold text-light-text-primary dark:text-dark-text-primary mb-6">
-            Sobre Nosotros
-          </h3>
-          <h4 className="text-2xl font-semibold text-accent mb-6">
-            Nuestra Misión
-          </h4>
-          <p className="text-lg text-light-text-secondary dark:text-dark-text-secondary max-w-4xl mx-auto leading-relaxed">
-            Articular, facilitar y fortalecer la colaboración entre consultores, startups, investigadores, organismos públicos y empresas de todos los tamaños para acelerar la adopción responsable y descentralizada de la IA en Chile. Funcionamos como un sistema operativo que conecta talento, capital, conocimiento e infraestructura desde cualquier rincón del país.
-          </p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-8 px-8 py-4 bg-accent text-white rounded-lg font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-          >
-            Sé protagonista
-          </motion.button>
-        </motion.div>
-
-        {/* Call to Action Box */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="mt-16 p-10 bg-gradient-to-r from-accent/10 to-accent/5 dark:from-accent/20 dark:to-accent/10 rounded-2xl border border-accent/30"
-        >
-          <h3 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-4 text-center">
-            Conecta, colabora y lidera el futuro de la IA en Chile
-          </h3>
-          <p className="text-lg text-light-text-secondary dark:text-dark-text-secondary text-center max-w-3xl mx-auto mb-6">
-            Forma parte de la red que impulsa la inteligencia artificial en nuestro país. Comparte experiencias, accede a oportunidades únicas y haz crecer tu impacto junto a los líderes del ecosistema.
-          </p>
-          <div className="text-center">
-            <span className="text-accent font-semibold">Súmate al ecosistema</span>
-          </div>
         </motion.div>
       </div>
     </section>
@@ -147,4 +109,3 @@ const Mission = () => {
 };
 
 export default Mission;
-
