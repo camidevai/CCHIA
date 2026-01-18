@@ -4,9 +4,12 @@ import { useRef } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import objectivesData from '../data/objectives.json';
+import { useTranslation } from '../hooks/useTranslation';
 
 const Mission = () => {
+  const { t } = useTranslation();
+  const objectivesData = t('objectives');
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,

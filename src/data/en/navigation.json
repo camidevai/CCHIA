@@ -1,0 +1,10 @@
+{
+  "navLinks": [
+    { "name": "Home", "href": "#inicio" },
+    { "name": "Our Vision", "href": "#vision" },
+    { "name": "Benefits", "href": "#beneficios" },
+    { "name": "Join Us", "href": "#unete" },
+    { "name": "Contact", "href": "#contacto" }
+  ]
+}
+

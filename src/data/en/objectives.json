@@ -1,0 +1,27 @@
+{
+  "sectionTitle": "Our Objectives",
+  "sectionSubtitle": "To Drive the Future of Artificial Intelligence in Chile",
+  "objectives": [
+    {
+      "title": "Collective Learning Network",
+      "description": "Build a broad network of active members among individuals, consultants, startups, researchers, students, SMEs, public organizations, and companies to exchange AI knowledge.",
+      "image": "/imagenes/colaboradores/red.jpg"
+    },
+    {
+      "title": "Digital Platform",
+      "description": "Develop a collaboration platform for members, integrating a talent directory, a map of sectoral needs, and a resource repository, with the goal of connecting Chile's AI ecosystem.",
+      "image": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800&h=600&fit=crop"
+    },
+    {
+      "title": "Training and Awareness",
+      "description": "Implement training and awareness programs that foster understanding of ethical and inclusive AI among diverse audiences, catalyzing projects with social impact.",
+      "image": "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800&h=600&fit=crop"
+    },
+    {
+      "title": "Strategic Alliances",
+      "description": "Formalize strategic alliances with AI organizations in Latin America and develop a Global Network of Chilean AI Talent, fostering collaboration and knowledge exchange on a regional scale.",
+      "image": "/imagenes/colaboradores/alizas.jpg"
+    }
+  ]
+}
+

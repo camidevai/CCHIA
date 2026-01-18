@@ -1,6 +1,7 @@
 import { lazy, Suspense, useState, useEffect } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { NavbarProvider, useNavbar } from './contexts/NavbarContext';
+import { LanguageProvider } from './contexts/LanguageContext';
 import Navbar from './components/Navbar';
 import LoadingSpinner from './components/LoadingSpinner';
 
@@ -53,11 +54,13 @@ const AppContent = () => {
 
 function App() {
   return (
-    <ThemeProvider>
-      <NavbarProvider>
-        <AppContent />
-      </NavbarProvider>
-    </ThemeProvider>
+    <LanguageProvider>
+      <ThemeProvider>
+        <NavbarProvider>
+          <AppContent />
+        </NavbarProvider>
+      </ThemeProvider>
+    </LanguageProvider>
   );
 }
 

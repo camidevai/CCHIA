@@ -1,7 +1,10 @@
-import collaboratorsData from '../data/collaborators.json';
+import { useTranslation } from '../hooks/useTranslation';
 
 // Componente de Carrusel Infinito - Colaboradores
 const InfiniteCarousel = () => {
+  const { t } = useTranslation();
+  const collaboratorsData = t('collaborators');
+
   // Obtener datos desde JSON
   const { sectionTitle, sectionSubtitle, collaborators } = collaboratorsData;
 

@@ -2,10 +2,13 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { useTheme } from '../contexts/ThemeContext';
 import MatrixBackground from './MatrixBackground';
-import heroData from '../data/hero.json';
+import { useTranslation } from '../hooks/useTranslation';
 
 const Hero = () => {
   const { theme } = useTheme();
+  const { t } = useTranslation();
+  const heroData = t('hero');
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,

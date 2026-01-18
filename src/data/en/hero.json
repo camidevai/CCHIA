@@ -1,0 +1,17 @@
+{
+  "title": {
+    "line1": "Chilean Chamber of",
+    "line2": "Artificial Intelligence"
+  },
+  "subtitle": "Driving Artificial Intelligence in Chile.",
+  "description": "Join Chile's leading AI organization. Connect, innovate, and transform the future with us.",
+  "cta": {
+    "primary": "Contact us today!",
+    "secondary": "Learn More"
+  },
+  "mascot": {
+    "image": "/imagenes/mascota/mascotaDeLado.png",
+    "alt": "CCHIA Mascot"
+  }
+}
+

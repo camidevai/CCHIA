@@ -1,0 +1,39 @@
+{
+  "sectionTitle": "Benefits",
+  "sectionSubtitle": "Join the Chamber and access exclusive benefits",
+  "sectionDescription": "Discover how being part of CCHIA can boost your career or business in the field of Artificial Intelligence",
+  "benefits": [
+    {
+      "icon": "networking",
+      "title": "Networking",
+      "description": "Access a network of AI experts from different sectors"
+    },
+    {
+      "icon": "events",
+      "title": "Exclusive Events",
+      "description": "Participate in conferences, workshops, and AI meetups"
+    },
+    {
+      "icon": "resources",
+      "title": "Resources",
+      "description": "Access tools, datasets, and specialized documentation"
+    },
+    {
+      "icon": "training",
+      "title": "Training",
+      "description": "Continuous training programs in the latest AI technologies"
+    },
+    {
+      "icon": "collaboration",
+      "title": "Collaboration",
+      "description": "Work on joint projects with other members and organizations"
+    },
+    {
+      "icon": "visibility",
+      "title": "Visibility",
+      "description": "Showcase your projects and achievements in the national and international AI community"
+    }
+  ],
+  "additionalInfo": "Collaboration and networking network • Access to exclusive events and resources • Visibility and growth for your organization"
+}
+

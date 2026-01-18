@@ -5,7 +5,7 @@
       "dark": "/imagenes/logoCchia2.png",
       "alt": "CCHIA Logo"
     },
-    "description": "Cámara Chilena de Inteligencia Artificial - Impulsando la IA en Chile a través de la colaboración, innovación y educación."
+    "description": "Chilean Chamber of Artificial Intelligence - Driving AI in Chile through collaboration, innovation, and education."
   },
   "socialLinks": [
     {
@@ -21,31 +21,31 @@
   ],
   "footerLinks": [
     {
-      "title": "Navegación",
+      "title": "Navigation",
       "links": [
         {
-          "name": "Inicio",
+          "name": "Home",
           "href": "#inicio"
         },
         {
-          "name": "Nuestra Visión",
+          "name": "Our Vision",
           "href": "#vision"
         },
         {
-          "name": "Beneficios",
+          "name": "Benefits",
           "href": "#beneficios"
         },
         {
-          "name": "Únete",
+          "name": "Join Us",
           "href": "#unete"
         }
       ]
     },
     {
-      "title": "Recursos",
+      "title": "Resources",
       "links": [
         {
-          "name": "Eventos",
+          "name": "Events",
           "href": "#"
         },
         {
@@ -53,7 +53,7 @@
           "href": "#"
         },
         {
-          "name": "Documentación",
+          "name": "Documentation",
           "href": "#"
         },
         {
@@ -66,20 +66,20 @@
       "title": "Legal",
       "links": [
         {
-          "name": "Términos de Uso",
+          "name": "Terms of Use",
           "href": "#"
         },
         {
-          "name": "Política de Privacidad",
+          "name": "Privacy Policy",
           "href": "#"
         },
         {
-          "name": "Código de Conducta",
+          "name": "Code of Conduct",
           "href": "#"
         }
       ]
     }
   ],
-  "copyright": "© {year} CCHIA - Cámara Chilena de Inteligencia Artificial. Todos los derechos reservados."
+  "copyright": "© {year} CCHIA - Chilean Chamber of Artificial Intelligence. All rights reserved."
 }
 

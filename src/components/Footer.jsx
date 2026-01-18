@@ -2,12 +2,14 @@ import { motion } from 'framer-motion';
 import { useNavbar } from '../contexts/NavbarContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { useState, useEffect } from 'react';
-import footerData from '../data/footer.json';
+import { useTranslation } from '../hooks/useTranslation';
 import { socialIcons } from './SocialIcons';
 
 const Footer = () => {
   const { isNavExpanded } = useNavbar();
   const { theme } = useTheme();
+  const { t } = useTranslation();
+  const footerData = t('footer');
   const currentYear = new Date().getFullYear();
   const [isMobile, setIsMobile] = useState(false);
 

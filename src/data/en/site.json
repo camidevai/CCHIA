@@ -1,0 +1,15 @@
+{
+  "siteName": "CCHIA",
+  "fullName": "Chilean Chamber of Artificial Intelligence",
+  "tagline": "Driving AI in Chile",
+  "logo": {
+    "light": "/imagenes/logoCchia2.png",
+    "dark": "/imagenes/logoCchia2.png",
+    "favicon": "/imagenes/logoCchia2.png"
+  },
+  "meta": {
+    "description": "Chilean Chamber of Artificial Intelligence - Driving AI in Chile",
+    "keywords": "artificial intelligence, AI, Chile, CCHIA, technology, innovation"
+  }
+}
+

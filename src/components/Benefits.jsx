@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import benefitsData from '../data/benefits.json';
+import { useTranslation } from '../hooks/useTranslation';
 import { benefitIcons } from './BenefitIcons';
 
 const Benefits = () => {
+  const { t } = useTranslation();
+  const benefitsData = t('benefits');
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,

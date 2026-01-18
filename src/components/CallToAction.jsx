@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import contactData from '../data/contact.json';
+import { useTranslation } from '../hooks/useTranslation';
 
 const CallToAction = () => {
+  const { t } = useTranslation();
+  const contactData = t('contact');
+
   const [ref, inView] = useInView({
     triggerOnce: true,
     threshold: 0.1,

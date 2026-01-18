@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 import { useNavbar } from '../contexts/NavbarContext';
 import ThemeToggle from './ThemeToggle';
-import navigationData from '../data/navigation.json';
-import siteData from '../data/site.json';
+import LanguageToggle from './LanguageToggle';
+import { useTranslation } from '../hooks/useTranslation';
 
 // Icon Components - Material Design Style with CCHIA Teal (#1FB6A6)
 const HomeIcon = () => (
@@ -59,7 +59,10 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Obtener datos de navegación desde JSON
+  // Obtener datos de navegación según idioma
+  const { t } = useTranslation();
+  const navigationData = t('navigation');
+  const siteData = t('site');
   const { navLinks } = navigationData;
 
   const handleNavClick = (e, href) => {
@@ -186,11 +189,12 @@ const Navbar = () => {
             })}
           </div>
 
-          {/* Spacer to push theme toggle to bottom */}
+          {/* Spacer to push toggles to bottom */}
           <div className="flex-1"></div>
 
-          {/* Theme Toggle at Bottom */}
-          <div className="mt-auto flex justify-center">
+          {/* Theme and Language Toggles at Bottom */}
+          <div className="mt-auto flex flex-col gap-3 items-center">
+            <LanguageToggle />
             <ThemeToggle inline={true} />
           </div>
         </div>
@@ -220,18 +224,22 @@ const Navbar = () => {
               />
             </motion.div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="p-2 rounded-lg hover:bg-light-bg-secondary dark:hover:bg-dark-bg-secondary transition-colors text-light-text-primary dark:text-dark-text-primary"
-              aria-label="Toggle menu"
-            >
-              <div className="w-6 h-5 flex flex-col justify-between">
-                <span className={`block h-0.5 w-full bg-current transition-transform ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
-                <span className={`block h-0.5 w-full bg-current transition-opacity ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
-                <span className={`block h-0.5 w-full bg-current transition-transform ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
-              </div>
-            </button>
+            {/* Right side: Language Toggle, Theme Toggle, and Mobile Menu Button */}
+            <div className="flex items-center gap-2">
+              <LanguageToggle />
+              <ThemeToggle inline={true} />
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="p-2 rounded-lg hover:bg-light-bg-secondary dark:hover:bg-dark-bg-secondary transition-colors text-light-text-primary dark:text-dark-text-primary"
+                aria-label="Toggle menu"
+              >
+                <div className="w-6 h-5 flex flex-col justify-between">
+                  <span className={`block h-0.5 w-full bg-current transition-transform ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`} />
+                  <span className={`block h-0.5 w-full bg-current transition-opacity ${isMobileMenuOpen ? 'opacity-0' : ''}`} />
+                  <span className={`block h-0.5 w-full bg-current transition-transform ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`} />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
 
