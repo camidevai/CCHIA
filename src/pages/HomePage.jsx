@@ -5,6 +5,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 const Hero = lazy(() => import('../components/Hero'));
 const InfiniteCarousel = lazy(() => import('../components/InfiniteCarousel'));
 const Mission = lazy(() => import('../components/Mission'));
+const EventsCalendar = lazy(() => import('../components/EventsCalendar'));
 const Benefits = lazy(() => import('../components/Benefits'));
 const CallToAction = lazy(() => import('../components/CallToAction'));
 
@@ -13,6 +14,7 @@ const HomePage = () => {
     <Suspense fallback={<LoadingSpinner />}>
       <Hero />
       <Mission />
+      <EventsCalendar />
       <Benefits />
       <InfiniteCarousel />
       <CallToAction />

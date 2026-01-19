@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
+import EventsManagement from '../components/EventsManagement';
 
 const AdminDashboard = () => {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -212,6 +213,16 @@ const AdminDashboard = () => {
               </div>
             </motion.button>
           </div>
+        </motion.div>
+
+        {/* Events Management Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-8 bg-light-bg-primary dark:bg-dark-bg-primary rounded-xl p-8 border border-light-border-primary dark:border-dark-border-primary shadow-lg"
+        >
+          <EventsManagement />
         </motion.div>
 
         {/* Password Change Modal */}
