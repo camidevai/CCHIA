@@ -81,14 +81,20 @@ const AdminLogin = () => {
         </motion.div>
 
         {/* Carousel Container */}
-        <div className="relative w-full h-full">
-          <AnimatePresence mode="wait">
+        <div className="relative w-full h-full overflow-hidden">
+          <AnimatePresence initial={false} custom={currentImageIndex}>
             <motion.div
               key={currentImageIndex}
-              initial={{ opacity: 0, scale: 1.1 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              transition={{ duration: 1 }}
+              custom={currentImageIndex}
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '-100%' }}
+              transition={{
+                type: 'spring',
+                stiffness: 300,
+                damping: 30,
+                duration: 0.8
+              }}
               className="absolute inset-0"
             >
               {/* Image */}
