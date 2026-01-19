@@ -37,6 +37,19 @@ const JoinIcon = () => (
   </svg>
 );
 
+const EventsIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-6 h-6">
+    <path fill="#1FB6A6" d="M38,6h-4V4c0-1.1-0.9-2-2-2s-2,0.9-2,2v2H18V4c0-1.1-0.9-2-2-2s-2,0.9-2,2v2h-4c-2.2,0-4,1.8-4,4v28c0,2.2,1.8,4,4,4h28c2.2,0,4-1.8,4-4V10C42,7.8,40.2,6,38,6z"/>
+    <rect fill="#fff" x="10" y="16" width="28" height="22"/>
+    <circle fill="#1FB6A6" cx="18" cy="24" r="2"/>
+    <circle fill="#1FB6A6" cx="24" cy="24" r="2"/>
+    <circle fill="#1FB6A6" cx="30" cy="24" r="2"/>
+    <circle fill="#1FB6A6" cx="18" cy="30" r="2"/>
+    <circle fill="#1FB6A6" cx="24" cy="30" r="2"/>
+    <circle fill="#1FB6A6" cx="30" cy="30" r="2"/>
+  </svg>
+);
+
 const ContactIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-6 h-6">
     <path fill="#1FB6A6" d="M40,8H8C5.8,8,4,9.8,4,12v24c0,2.2,1.8,4,4,4h32c2.2,0,4-1.8,4-4V12C44,9.8,42.2,8,40,8z"/>
@@ -138,6 +151,7 @@ const Navbar = () => {
               const icons = [
                 <HomeIcon key="home" />,
                 <VisionIcon key="vision" />,
+                <EventsIcon key="events" />,
                 <BenefitsIcon key="benefits" />,
                 <JoinIcon key="join" />,
                 <ContactIcon key="contact" />

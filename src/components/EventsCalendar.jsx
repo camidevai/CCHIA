@@ -43,12 +43,8 @@ const EventsCalendar = () => {
     return text.substring(0, maxLength) + '...';
   };
 
-  if (upcomingEvents.length === 0) {
-    return null; // Don't show section if no upcoming events
-  }
-
   return (
-    <section className="py-20 px-6 bg-light-bg-secondary dark:bg-dark-bg-secondary">
+    <section id="eventos" className="py-20 px-6 bg-light-bg-secondary dark:bg-dark-bg-secondary">
       <div className="max-w-7xl mx-auto">
         {/* Section Header */}
         <motion.div
@@ -66,14 +62,46 @@ const EventsCalendar = () => {
           </p>
         </motion.div>
 
-        {/* Events Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
+        {/* No Events Message */}
+        {upcomingEvents.length === 0 ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center py-16"
+          >
+            <div className="inline-block p-8 bg-light-bg-primary dark:bg-dark-bg-primary rounded-2xl border-2 border-light-border-primary dark:border-dark-border-primary shadow-xl">
+              <svg
+                className="w-24 h-24 mx-auto mb-6 text-secondary dark:text-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              <h3 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-3">
+                No hay eventos próximos
+              </h3>
+              <p className="text-light-text-secondary dark:text-dark-text-secondary max-w-md mx-auto">
+                Estamos preparando nuevos eventos increíbles. ¡Mantente atento a nuestras redes sociales para las próximas novedades!
+              </p>
+            </div>
+          </motion.div>
+        ) : (
+          /* Events Grid */
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          >
           {upcomingEvents.map((event) => {
             const badge = getEventBadge(event.date);
             
@@ -128,7 +156,8 @@ const EventsCalendar = () => {
               </motion.div>
             );
           })}
-        </motion.div>
+          </motion.div>
+        )}
       </div>
     </section>
   );
