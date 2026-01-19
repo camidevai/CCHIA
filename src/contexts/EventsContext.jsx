@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import initialEventsData from '../data/events.json';
 
 const EventsContext = createContext();
 
@@ -12,8 +13,9 @@ export const useEvents = () => {
 
 export const EventsProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-  // Load events from localStorage on mount
+  // Load events from localStorage or initial JSON on mount
   useEffect(() => {
     const storedEvents = localStorage.getItem('cchia_events');
     if (storedEvents) {
@@ -22,15 +24,22 @@ export const EventsProvider = ({ children }) => {
         setEvents(parsedEvents);
       } catch (error) {
         console.error('Error loading events from localStorage:', error);
-        setEvents([]);
+        // If localStorage fails, load from JSON
+        setEvents(initialEventsData);
       }
+    } else {
+      // If no localStorage data, load initial events from JSON
+      setEvents(initialEventsData);
     }
+    setIsLoaded(true);
   }, []);
 
-  // Save events to localStorage whenever they change
+  // Save events to localStorage whenever they change (only after initial load)
   useEffect(() => {
-    localStorage.setItem('cchia_events', JSON.stringify(events));
-  }, [events]);
+    if (isLoaded) {
+      localStorage.setItem('cchia_events', JSON.stringify(events));
+    }
+  }, [events, isLoaded]);
 
   // Create a new event
   const createEvent = (eventData) => {
