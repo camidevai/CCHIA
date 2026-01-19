@@ -1,16 +1,25 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
+import { useTheme } from '../contexts/ThemeContext';
 
 const AdminLogin = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   const navigate = useNavigate();
   const { login, isAuthenticated } = useAuth();
+  const { theme } = useTheme();
+
+  // Imágenes del carrusel
+  const carouselImages = [
+    '/imagenes/colaboradores/alizas.jpg',
+    '/imagenes/colaboradores/red.jpg',
+  ];
 
   // Redirect if already authenticated
   useEffect(() => {
@@ -18,6 +27,17 @@ const AdminLogin = () => {
       navigate('/admin/dashboard');
     }
   }, [isAuthenticated, navigate]);
+
+  // Auto-rotate carousel images
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) =>
+        (prevIndex + 1) % carouselImages.length
+      );
+    }, 5000); // Change image every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [carouselImages.length]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,82 +59,88 @@ const AdminLogin = () => {
 
   return (
     <div className="min-h-screen bg-light-bg-primary dark:bg-dark-bg-primary flex">
-      {/* Left Side - Image/Branding */}
+      {/* Left Side - Carousel with Images */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.6 }}
-        className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-primary via-primary-dark to-secondary relative overflow-hidden"
+        className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10 dark:from-primary/20 dark:to-secondary/20"
       >
-        {/* Decorative elements */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-20 w-64 h-64 bg-white rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-secondary-light rounded-full blur-3xl"></div>
-        </div>
+        {/* Logo CCHIA en esquina superior izquierda */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.3 }}
+          className="absolute top-8 left-8 z-20"
+        >
+          <img
+            src={theme === 'dark' ? '/imagenes/logoCchia1.png' : '/imagenes/logoCchia2.png'}
+            alt="CCHIA Logo"
+            className="w-24 h-24 object-contain drop-shadow-2xl"
+          />
+        </motion.div>
 
-        {/* Content */}
-        <div className="relative z-10 flex flex-col justify-center items-center w-full p-12 text-white">
-          {/* Logo */}
-          <motion.div
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
-            className="mb-8"
-          >
-            <div className="w-32 h-32 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-2xl">
-              <svg className="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-              </svg>
-            </div>
-          </motion.div>
+        {/* Carousel Container */}
+        <div className="relative w-full h-full">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentImageIndex}
+              initial={{ opacity: 0, scale: 1.1 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.9 }}
+              transition={{ duration: 1 }}
+              className="absolute inset-0"
+            >
+              {/* Image */}
+              <img
+                src={carouselImages[currentImageIndex]}
+                alt={`Colaborador ${currentImageIndex + 1}`}
+                className="w-full h-full object-cover"
+              />
 
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="text-4xl font-bold mb-4 text-center"
-          >
-            Panel de Administración
-          </motion.h1>
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-transparent to-secondary/40"></div>
+            </motion.div>
+          </AnimatePresence>
 
-          {/* Subtitle */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="text-xl text-white/90 mb-8 text-center"
-          >
-            Cámara Chilena de Inteligencia Artificial
-          </motion.p>
+          {/* Carousel Indicators */}
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+            {carouselImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImageIndex(index)}
+                className={`transition-all duration-300 rounded-full ${
+                  index === currentImageIndex
+                    ? 'w-12 h-3 bg-white'
+                    : 'w-3 h-3 bg-white/50 hover:bg-white/75'
+                }`}
+                aria-label={`Ir a imagen ${index + 1}`}
+              />
+            ))}
+          </div>
 
-          {/* Features */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-            className="space-y-4 w-full max-w-md"
-          >
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4">
-              <svg className="w-6 h-6 text-secondary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-              <span className="text-sm">Acceso seguro y protegido</span>
-            </div>
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4">
-              <svg className="w-6 h-6 text-secondary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-              </svg>
-              <span className="text-sm">Gestión completa del sistema</span>
-            </div>
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg p-4">
-              <svg className="w-6 h-6 text-secondary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              <span className="text-sm">Rendimiento optimizado</span>
-            </div>
-          </motion.div>
+          {/* Text Overlay */}
+          <div className="absolute inset-0 flex flex-col justify-center items-center text-white z-10 p-12">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="text-center bg-black/30 backdrop-blur-md rounded-2xl p-8 max-w-lg"
+            >
+              <h1 className="text-4xl font-bold mb-4">
+                Panel de Administración
+              </h1>
+              <p className="text-xl text-white/90 mb-6">
+                Cámara Chilena de Inteligencia Artificial
+              </p>
+              <div className="flex items-center justify-center gap-2 text-sm">
+                <svg className="w-5 h-5 text-secondary-light" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+                <span>Acceso seguro y protegido</span>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </motion.div>
 
