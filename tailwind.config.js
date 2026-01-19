@@ -7,6 +7,9 @@ export default {
   darkMode: 'class',
   theme: {
     extend: {
+      screens: {
+        'xs': '300px',  // Extra small devices (custom breakpoint)
+      },
       colors: {
         // CCHIA Brand Colors - Institutional Identity
         brand: {

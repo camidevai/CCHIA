@@ -127,7 +127,7 @@ const Navbar = () => {
             <img
               src={theme === 'dark' ? siteData.logo.dark : siteData.logo.light}
               alt={siteData.siteName}
-              className={`object-contain transition-all duration-300 ${isNavExpanded ? 'h-24 w-24' : 'h-12 w-12'}`}
+              className={`object-contain transition-all duration-300 ${isNavExpanded ? 'h-24 w-24 max-xs:h-20 max-xs:w-20' : 'h-12 w-12 max-xs:h-9 max-xs:w-9'}`}
             />
           </motion.div>
 
@@ -220,7 +220,7 @@ const Navbar = () => {
               <img
                 src={theme === 'dark' ? siteData.logo.dark : siteData.logo.light}
                 alt={siteData.siteName}
-                className="h-12 w-auto transition-all duration-300"
+                className="h-12 w-auto transition-all duration-300 max-xs:h-9"
               />
             </motion.div>
 
