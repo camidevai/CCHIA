@@ -49,7 +49,7 @@ const EventsManagement = () => {
     setTimeout(resetForm, 300);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setSuccess('');
@@ -70,24 +70,33 @@ const EventsManagement = () => {
       return;
     }
 
-    if (editingEvent) {
-      updateEvent(editingEvent.id, formData);
-      setSuccess('Evento actualizado exitosamente');
-    } else {
-      createEvent(formData);
-      setSuccess('Evento creado exitosamente');
-    }
+    try {
+      if (editingEvent) {
+        await updateEvent(editingEvent.id, formData);
+        setSuccess('Evento actualizado exitosamente en el JSON');
+      } else {
+        await createEvent(formData);
+        setSuccess('Evento creado exitosamente en el JSON');
+      }
 
-    setTimeout(() => {
-      handleCloseModal();
-    }, 1500);
+      setTimeout(() => {
+        handleCloseModal();
+      }, 1500);
+    } catch (err) {
+      setError('Error al guardar el evento. Asegúrate de que el servidor esté corriendo.');
+    }
   };
 
-  const handleDelete = (id) => {
+  const handleDelete = async (id) => {
     if (window.confirm('¿Estás seguro de que deseas eliminar este evento?')) {
-      deleteEvent(id);
-      setSuccess('Evento eliminado exitosamente');
-      setTimeout(() => setSuccess(''), 3000);
+      try {
+        await deleteEvent(id);
+        setSuccess('Evento eliminado exitosamente del JSON');
+        setTimeout(() => setSuccess(''), 3000);
+      } catch (err) {
+        setError('Error al eliminar el evento. Asegúrate de que el servidor esté corriendo.');
+        setTimeout(() => setError(''), 3000);
+      }
     }
   };
 

@@ -1,7 +1,9 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import initialEventsData from '../data/events.json';
 
 const EventsContext = createContext();
+
+// API Base URL
+const API_URL = 'http://localhost:3001/api/events';
 
 export const useEvents = () => {
   const context = useContext(EventsContext);
@@ -13,59 +15,101 @@ export const useEvents = () => {
 
 export const EventsProvider = ({ children }) => {
   const [events, setEvents] = useState([]);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Load events from localStorage or initial JSON on mount
+  // Load events from API on mount
   useEffect(() => {
-    const storedEvents = localStorage.getItem('cchia_events');
-    if (storedEvents) {
-      try {
-        const parsedEvents = JSON.parse(storedEvents);
-        setEvents(parsedEvents);
-      } catch (error) {
-        console.error('Error loading events from localStorage:', error);
-        // If localStorage fails, load from JSON
-        setEvents(initialEventsData);
-      }
-    } else {
-      // If no localStorage data, load initial events from JSON
-      setEvents(initialEventsData);
-    }
-    setIsLoaded(true);
+    loadEvents();
   }, []);
 
-  // Save events to localStorage whenever they change (only after initial load)
-  useEffect(() => {
-    if (isLoaded) {
-      localStorage.setItem('cchia_events', JSON.stringify(events));
+  // Load all events from API
+  const loadEvents = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const response = await fetch(API_URL);
+      if (!response.ok) {
+        throw new Error('Error loading events');
+      }
+      const data = await response.json();
+      setEvents(data);
+    } catch (err) {
+      console.error('Error loading events:', err);
+      setError(err.message);
+      setEvents([]);
+    } finally {
+      setIsLoading(false);
     }
-  }, [events, isLoaded]);
-
-  // Create a new event
-  const createEvent = (eventData) => {
-    const newEvent = {
-      id: Date.now().toString(),
-      ...eventData,
-      createdAt: new Date().toISOString(),
-    };
-    setEvents((prevEvents) => [...prevEvents, newEvent]);
-    return newEvent;
   };
 
-  // Update an existing event
-  const updateEvent = (id, updatedData) => {
-    setEvents((prevEvents) =>
-      prevEvents.map((event) =>
-        event.id === id
-          ? { ...event, ...updatedData, updatedAt: new Date().toISOString() }
-          : event
-      )
-    );
+  // Create a new event (POST to API)
+  const createEvent = async (eventData) => {
+    try {
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(eventData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error creating event');
+      }
+
+      const newEvent = await response.json();
+      setEvents((prevEvents) => [...prevEvents, newEvent]);
+      return newEvent;
+    } catch (err) {
+      console.error('Error creating event:', err);
+      throw err;
+    }
   };
 
-  // Delete an event
-  const deleteEvent = (id) => {
-    setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+  // Update an existing event (PUT to API)
+  const updateEvent = async (id, updatedData) => {
+    try {
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+      });
+
+      if (!response.ok) {
+        throw new Error('Error updating event');
+      }
+
+      const updatedEvent = await response.json();
+      setEvents((prevEvents) =>
+        prevEvents.map((event) => (event.id === id ? updatedEvent : event))
+      );
+      return updatedEvent;
+    } catch (err) {
+      console.error('Error updating event:', err);
+      throw err;
+    }
+  };
+
+  // Delete an event (DELETE from API)
+  const deleteEvent = async (id) => {
+    try {
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Error deleting event');
+      }
+
+      setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
+      return true;
+    } catch (err) {
+      console.error('Error deleting event:', err);
+      throw err;
+    }
   };
 
   // Get all events
@@ -110,6 +154,9 @@ export const EventsProvider = ({ children }) => {
 
   const value = {
     events,
+    isLoading,
+    error,
+    loadEvents,
     createEvent,
     updateEvent,
     deleteEvent,
