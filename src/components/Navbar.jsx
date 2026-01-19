@@ -4,6 +4,7 @@ import { useTheme } from '../contexts/ThemeContext';
 import { useNavbar } from '../contexts/NavbarContext';
 import ThemeToggle from './ThemeToggle';
 import LanguageToggle from './LanguageToggle';
+import AdminButton from './AdminButton';
 import { useTranslation } from '../hooks/useTranslation';
 
 // Icon Components - Material Design Style with CCHIA Teal (#1FB6A6)
@@ -192,8 +193,9 @@ const Navbar = () => {
           {/* Spacer to push toggles to bottom */}
           <div className="flex-1"></div>
 
-          {/* Theme and Language Toggles at Bottom */}
+          {/* Theme, Language, and Admin Toggles at Bottom */}
           <div className="mt-auto flex flex-col gap-3 items-center">
+            <AdminButton />
             <LanguageToggle />
             <ThemeToggle inline={true} />
           </div>
@@ -224,8 +226,9 @@ const Navbar = () => {
               />
             </motion.div>
 
-            {/* Right side: Language Toggle, Theme Toggle, and Mobile Menu Button */}
+            {/* Right side: Admin, Language Toggle, Theme Toggle, and Mobile Menu Button */}
             <div className="flex items-center gap-2">
+              <AdminButton />
               <LanguageToggle />
               <ThemeToggle inline={true} />
               <button

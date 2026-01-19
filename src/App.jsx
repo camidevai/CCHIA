@@ -1,19 +1,20 @@
 import { lazy, Suspense, useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { NavbarProvider, useNavbar } from './contexts/NavbarContext';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { AuthProvider } from './contexts/AuthContext';
 import Navbar from './components/Navbar';
 import LoadingSpinner from './components/LoadingSpinner';
+import ProtectedRoute from './components/ProtectedRoute';
 
-// Lazy load components for better performance
-const Hero = lazy(() => import('./components/Hero'));
-const InfiniteCarousel = lazy(() => import('./components/InfiniteCarousel'));
-const Mission = lazy(() => import('./components/Mission'));
-const Benefits = lazy(() => import('./components/Benefits'));
-const CallToAction = lazy(() => import('./components/CallToAction'));
+// Lazy load pages
+const HomePage = lazy(() => import('./pages/HomePage'));
+const AdminLogin = lazy(() => import('./pages/AdminLogin'));
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const Footer = lazy(() => import('./components/Footer'));
 
-const AppContent = () => {
+const MainLayout = ({ children }) => {
   const { isNavExpanded } = useNavbar();
   const [isMobile, setIsMobile] = useState(false);
 
@@ -32,35 +33,59 @@ const AppContent = () => {
   return (
     <div className="min-h-screen bg-light-bg-primary dark:bg-dark-bg-primary text-light-text-primary dark:text-dark-text-primary transition-colors duration-300">
       <Navbar />
-
-      <Suspense fallback={<LoadingSpinner />}>
-        {/* Main content with dynamic left padding for vertical navbar on desktop */}
-        <main
-          className="transition-all duration-300"
-          style={{ paddingLeft }}
-        >
-          <Hero />
-          <Mission />
-          <Benefits />
-          <InfiniteCarousel />
-          <CallToAction />
-        </main>
-
-        <Footer />
-      </Suspense>
+      <main
+        className="transition-all duration-300"
+        style={{ paddingLeft }}
+      >
+        {children}
+      </main>
+      <Footer />
     </div>
+  );
+};
+
+const AppContent = () => {
+  return (
+    <Suspense fallback={<LoadingSpinner />}>
+      <Routes>
+        {/* Main website route */}
+        <Route
+          path="/"
+          element={
+            <MainLayout>
+              <HomePage />
+            </MainLayout>
+          }
+        />
+
+        {/* Admin routes */}
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Suspense>
   );
 };
 
 function App() {
   return (
-    <LanguageProvider>
-      <ThemeProvider>
-        <NavbarProvider>
-          <AppContent />
-        </NavbarProvider>
-      </ThemeProvider>
-    </LanguageProvider>
+    <Router>
+      <LanguageProvider>
+        <ThemeProvider>
+          <AuthProvider>
+            <NavbarProvider>
+              <AppContent />
+            </NavbarProvider>
+          </AuthProvider>
+        </ThemeProvider>
+      </LanguageProvider>
+    </Router>
   );
 }
 
