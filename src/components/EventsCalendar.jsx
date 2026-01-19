@@ -1,10 +1,8 @@
 import { motion } from 'framer-motion';
 import { useEvents } from '../contexts/EventsContext';
-import { useTranslation } from '../contexts/LanguageContext';
 
 const EventsCalendar = () => {
   const { getUpcomingEvents, getDaysUntilEvent, formatEventDate } = useEvents();
-  const { t } = useTranslation();
   const upcomingEvents = getUpcomingEvents();
 
   // Animation variants
