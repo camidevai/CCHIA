@@ -1,15 +1,18 @@
 import { useTranslation } from '../hooks/useTranslation';
+import { usePartners } from '../contexts/PartnersContext';
 
 // Componente de Carrusel Infinito - Colaboradores
 const InfiniteCarousel = () => {
   const { t } = useTranslation();
-  const collaboratorsData = t('collaborators');
+  const { partners, isLoading } = usePartners();
 
-  // Obtener datos desde JSON
-  const { sectionTitle, sectionSubtitle, collaborators } = collaboratorsData;
+  // Si no hay aliados o está cargando, no mostrar
+  if (isLoading || partners.length === 0) {
+    return null;
+  }
 
-  // Duplicar los colaboradores para el efecto infinito
-  const duplicatedCollaborators = [...collaborators, ...collaborators];
+  // Duplicar los aliados para el efecto infinito
+  const duplicatedPartners = [...partners, ...partners, ...partners];
 
   return (
     <section className="py-20 bg-gradient-to-b from-light-bg-primary via-light-bg-secondary to-light-bg-primary dark:from-dark-bg-primary dark:via-dark-bg-secondary dark:to-dark-bg-primary overflow-hidden relative">
@@ -23,10 +26,10 @@ const InfiniteCarousel = () => {
         {/* Title */}
         <div className="text-center mb-8 md:mb-12 px-4">
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-light-text-primary dark:text-dark-text-primary mb-3">
-            {sectionTitle}
+            {t('collaborators.sectionTitle', 'Trabajamos con')}
           </h3>
           <p className="text-base sm:text-lg text-light-text-secondary dark:text-dark-text-secondary mt-2">
-            {sectionSubtitle}
+            {t('collaborators.sectionSubtitle', 'Nuestros colaboradores y aliados estratégicos')}
           </p>
           <div className="w-24 sm:w-32 h-1.5 bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mt-4" />
         </div>
@@ -37,33 +40,38 @@ const InfiniteCarousel = () => {
 
         {/* Carrusel */}
         <div className="flex gap-4 sm:gap-6 md:gap-8 animate-scroll-left">
-          {duplicatedCollaborators.map((collaborator, index) => (
+          {duplicatedPartners.map((partner, index) => (
             <div
-              key={`${collaborator.name}-${index}`}
-              className="group relative px-6 py-6 sm:px-8 sm:py-8 md:px-12 md:py-10 bg-light-bg-primary dark:bg-dark-bg-primary rounded-xl sm:rounded-2xl border-2 border-light-border-primary dark:border-dark-border-primary hover:border-accent whitespace-nowrap flex-shrink-0 shadow-lg hover:shadow-2xl hover:shadow-accent/20 transition-all duration-300 hover:scale-105 overflow-hidden min-w-[180px] sm:min-w-[220px] md:min-w-[280px]"
+              key={`${partner.id}-${index}`}
+              className="group relative px-6 py-6 sm:px-8 sm:py-8 md:px-12 md:py-10 bg-light-bg-primary dark:bg-dark-bg-primary rounded-xl sm:rounded-2xl border-2 border-light-border-primary dark:border-dark-border-primary hover:border-secondary dark:hover:border-secondary-light whitespace-nowrap flex-shrink-0 shadow-lg hover:shadow-2xl hover:shadow-secondary/20 transition-all duration-300 hover:scale-105 overflow-hidden min-w-[180px] sm:min-w-[220px] md:min-w-[280px]"
             >
               {/* Glow effect on hover */}
-              <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               {/* Content */}
               <div className="relative flex flex-col items-center justify-center gap-3 sm:gap-4">
-                {/* Logo Placeholder */}
-                <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-lg sm:rounded-xl bg-light-bg-secondary dark:bg-dark-bg-secondary border-2 border-dashed border-light-border-primary dark:border-dark-border-primary flex items-center justify-center group-hover:border-accent transition-colors duration-300">
-                  <svg className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-light-text-tertiary dark:text-dark-text-tertiary opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
+                {/* Logo */}
+                <div className="w-20 h-20 sm:w-24 sm:h-24 md:w-32 md:h-32 rounded-lg sm:rounded-xl bg-white dark:bg-dark-bg-secondary p-3 sm:p-4 flex items-center justify-center border-2 border-light-border-primary dark:border-dark-border-primary group-hover:border-secondary dark:group-hover:border-secondary-light transition-all duration-300 shadow-md">
+                  <img
+                    src={partner.logo_url || '/imagenes/mascota/mascotaCentral.png'}
+                    alt={partner.name}
+                    className="max-w-full max-h-full object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                    onError={(e) => {
+                      e.target.src = '/imagenes/mascota/mascotaCentral.png';
+                    }}
+                  />
                 </div>
 
-                {/* Status Badge */}
-                <div className="px-3 py-1.5 sm:px-4 sm:py-2 bg-accent/10 border border-accent/30 rounded-full">
-                  <span className="text-xs sm:text-sm font-semibold text-accent">
-                    {collaborator.status}
+                {/* Partner Name */}
+                <div className="px-3 py-1.5 sm:px-4 sm:py-2 bg-secondary/10 border border-secondary/30 rounded-full">
+                  <span className="text-xs sm:text-sm font-semibold text-light-text-primary dark:text-dark-text-primary group-hover:text-secondary dark:group-hover:text-secondary-light transition-colors duration-300">
+                    {partner.name}
                   </span>
                 </div>
               </div>
 
               {/* Decorative corner accent */}
-              <div className="absolute top-0 right-0 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-accent/10 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute top-0 right-0 w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-secondary/10 rounded-bl-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
           ))}
         </div>

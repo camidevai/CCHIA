@@ -7,7 +7,6 @@ const InfiniteCarousel = lazy(() => import('../components/InfiniteCarousel'));
 const Mission = lazy(() => import('../components/Mission'));
 const EventsCalendar = lazy(() => import('../components/EventsCalendar'));
 const Benefits = lazy(() => import('../components/Benefits'));
-const PartnersSection = lazy(() => import('../components/PartnersSection'));
 const CallToAction = lazy(() => import('../components/CallToAction'));
 
 const HomePage = () => {
@@ -17,7 +16,6 @@ const HomePage = () => {
       <Mission />
       <EventsCalendar />
       <Benefits />
-      <PartnersSection />
       <InfiniteCarousel />
       <CallToAction />
     </Suspense>
