@@ -1,8 +1,10 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useEvents } from '../contexts/EventsContext';
 
 const EventsCalendar = () => {
-  const { getUpcomingEvents, getDaysUntilEvent, formatEventDate } = useEvents();
+  const { events, getDaysUntilEvent, formatEventDate, getUpcomingEvents } = useEvents();
+
+  // Recalcular eventos próximos cada vez que cambie el array de eventos
   const upcomingEvents = getUpcomingEvents();
 
   // Animation variants
@@ -102,16 +104,21 @@ const EventsCalendar = () => {
             viewport={{ once: true }}
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           >
-          {upcomingEvents.map((event) => {
-            const badge = getEventBadge(event.date);
-            
-            return (
-              <motion.div
-                key={event.id}
-                variants={cardVariants}
-                whileHover={{ y: -10, scale: 1.02 }}
-                className="group relative bg-light-bg-primary dark:bg-dark-bg-primary rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-light-border-primary dark:border-dark-border-primary"
-              >
+          <AnimatePresence mode="popLayout">
+            {upcomingEvents.map((event) => {
+              const badge = getEventBadge(event.date);
+
+              return (
+                <motion.div
+                  key={event.id}
+                  variants={cardVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.3 } }}
+                  layout
+                  whileHover={{ y: -10, scale: 1.02 }}
+                  className="group relative bg-light-bg-primary dark:bg-dark-bg-primary rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-light-border-primary dark:border-dark-border-primary"
+                >
                 {/* Event Image */}
                 <div className="relative h-48 overflow-hidden">
                   <img
@@ -156,6 +163,7 @@ const EventsCalendar = () => {
               </motion.div>
             );
           })}
+          </AnimatePresence>
           </motion.div>
         )}
       </div>
