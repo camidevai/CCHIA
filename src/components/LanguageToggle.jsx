@@ -7,35 +7,41 @@ const LanguageToggle = () => {
   return (
     <motion.button
       onClick={toggleLanguage}
-      className="relative flex items-center gap-1.5 px-2.5 py-1.5 sm:px-3 sm:py-2 bg-light-bg-secondary/80 dark:bg-dark-bg-secondary/80 backdrop-blur-sm rounded-lg border border-light-border-primary/40 dark:border-dark-border-primary/40 hover:border-secondary dark:hover:border-secondary-light transition-all duration-300 shadow-sm hover:shadow-md group"
-      whileHover={{ scale: 1.05 }}
+      className="relative p-2 rounded-lg hover:bg-light-bg-secondary dark:hover:bg-dark-bg-secondary transition-all duration-300 group"
+      whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       aria-label={language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+      title={language === 'es' ? 'Cambiar a Inglés' : 'Switch to Spanish'}
     >
-      {/* Icono de globo */}
+      {/* Icono de idioma - Estilo CCHIA */}
       <svg
-        className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-light-text-tertiary dark:text-dark-text-tertiary group-hover:text-secondary transition-colors duration-300"
-        fill="currentColor"
-        viewBox="0 0 20 20"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 48 48"
+        className="w-6 h-6"
       >
+        <circle fill="#1FB6A6" cx="24" cy="24" r="20"/>
         <path
-          fillRule="evenodd"
-          d="M10 18a8 8 0 100-16 8 8 0 000 16zM4.332 8.027a6.012 6.012 0 011.912-2.706C6.512 5.73 6.974 6 7.5 6A1.5 1.5 0 019 7.5V8a2 2 0 004 0 2 2 0 011.523-1.943A5.977 5.977 0 0116 10c0 .34-.028.675-.083 1H15a2 2 0 00-2 2v2.197A5.973 5.973 0 0110 16v-2a2 2 0 00-2-2 2 2 0 01-2-2 2 2 0 00-1.668-1.973z"
-          clipRule="evenodd"
+          fill="#fff"
+          d="M24,6c-9.9,0-18,8.1-18,18s8.1,18,18,18s18-8.1,18-18S33.9,6,24,6z M24,38c-2.2,0-4.3-0.4-6.2-1.2 c0.8-1.5,2.5-2.5,4.4-2.5h3.6c1.9,0,3.6,1,4.4,2.5C28.3,37.6,26.2,38,24,38z M33.5,35.2c-1.3-2.3-3.8-3.9-6.7-3.9h-3.6 c-2.9,0-5.4,1.6-6.7,3.9c-3.1-2.5-5.1-6.3-5.1-10.6c0-1.5,0.2-2.9,0.6-4.3h4.5c0.6,0,1-0.4,1-1s-0.4-1-1-1h-3.9 c0.9-2.1,2.3-3.9,4.1-5.3c0.4,0.8,1.2,1.3,2.1,1.3h2c0.6,0,1-0.4,1-1s-0.4-1-1-1h-2c-0.3,0-0.5-0.1-0.7-0.2 c1.7-0.9,3.6-1.4,5.6-1.4c2,0,3.9,0.5,5.6,1.4c-0.2,0.1-0.4,0.2-0.7,0.2h-2c-0.6,0-1,0.4-1,1s0.4,1,1,1h2c0.9,0,1.7-0.5,2.1-1.3 c1.8,1.4,3.2,3.2,4.1,5.3h-3.9c-0.6,0-1,0.4-1,1s0.4,1,1,1h4.5c0.4,1.4,0.6,2.8,0.6,4.3C38.6,28.9,36.6,32.7,33.5,35.2z"
         />
+        <text
+          x="24"
+          y="28"
+          fontSize="12"
+          fontWeight="bold"
+          fill="#1FB6A6"
+          textAnchor="middle"
+        >
+          {language === 'es' ? 'ES' : 'EN'}
+        </text>
       </svg>
 
-      {/* Texto del idioma actual */}
-      <span className="text-xs sm:text-sm font-semibold text-light-text-primary dark:text-dark-text-primary group-hover:text-secondary transition-colors duration-300">
-        {language === 'es' ? 'ES' : 'EN'}
-      </span>
-
-      {/* Indicador de cambio (punto pulsante) */}
+      {/* Indicador de idioma activo */}
       <motion.div
-        className="w-1 h-1 rounded-full bg-secondary"
+        className="absolute bottom-0 right-0 w-1.5 h-1.5 rounded-full bg-secondary"
         animate={{
-          scale: [1, 1.5, 1],
-          opacity: [0.5, 1, 0.5],
+          scale: [1, 1.3, 1],
+          opacity: [0.6, 1, 0.6],
         }}
         transition={{
           duration: 2,
