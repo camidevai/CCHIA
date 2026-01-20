@@ -422,7 +422,8 @@ body {
 }
 
 .animate-scroll-left {
-  animation: scroll-left 30s linear infinite;
+  animation: scroll-left 40s linear infinite;
+  /* Velocidad más lenta para efecto más suave */
 }
 
 .animate-scroll-left:hover {

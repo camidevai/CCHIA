@@ -11,8 +11,9 @@ const InfiniteCarousel = () => {
     return null;
   }
 
-  // Duplicar los aliados para el efecto infinito
-  const duplicatedPartners = [...partners, ...partners, ...partners];
+  // Duplicar los aliados SOLO 2 veces para el efecto infinito seamless
+  // Esto es suficiente para que el loop sea imperceptible
+  const duplicatedPartners = [...partners, ...partners];
 
   return (
     <section className="py-20 bg-gradient-to-b from-light-bg-primary via-light-bg-secondary to-light-bg-primary dark:from-dark-bg-primary dark:via-dark-bg-secondary dark:to-dark-bg-primary overflow-hidden relative">
@@ -39,11 +40,11 @@ const InfiniteCarousel = () => {
         <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-32 bg-gradient-to-l from-light-bg-secondary dark:from-dark-bg-secondary to-transparent z-10 pointer-events-none" />
 
         {/* Carrusel */}
-        <div className="flex gap-4 sm:gap-6 md:gap-8 animate-scroll-left">
+        <div className="flex gap-8 sm:gap-12 md:gap-16 animate-scroll-left">
           {duplicatedPartners.map((partner, index) => (
             <div
               key={`${partner.id}-${index}`}
-              className="group relative px-6 py-6 sm:px-8 sm:py-8 md:px-12 md:py-10 bg-light-bg-primary dark:bg-dark-bg-primary rounded-xl sm:rounded-2xl border-2 border-light-border-primary dark:border-dark-border-primary hover:border-secondary dark:hover:border-secondary-light whitespace-nowrap flex-shrink-0 shadow-lg hover:shadow-2xl hover:shadow-secondary/20 transition-all duration-300 hover:scale-105 overflow-hidden min-w-[180px] sm:min-w-[220px] md:min-w-[280px]"
+              className="group relative px-6 py-6 sm:px-8 sm:py-8 md:px-12 md:py-10 bg-light-bg-primary dark:bg-dark-bg-primary rounded-xl sm:rounded-2xl border-2 border-light-border-primary dark:border-dark-border-primary hover:border-secondary dark:hover:border-secondary-light whitespace-nowrap flex-shrink-0 shadow-lg hover:shadow-2xl hover:shadow-secondary/20 transition-all duration-300 hover:scale-105 overflow-hidden min-w-[200px] sm:min-w-[240px] md:min-w-[300px]"
             >
               {/* Glow effect on hover */}
               <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
