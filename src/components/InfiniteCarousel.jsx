@@ -6,6 +6,13 @@ const InfiniteCarousel = () => {
   const { t } = useTranslation();
   const { partners, isLoading } = usePartners();
 
+  // Obtener datos de traducción
+  const collaboratorsData = t('collaborators');
+  const { sectionTitle, sectionSubtitle } = collaboratorsData || {
+    sectionTitle: 'Trabajamos con',
+    sectionSubtitle: 'Nuestros colaboradores y aliados estratégicos'
+  };
+
   // Duplicar los aliados SOLO 2 veces para el efecto infinito seamless
   // Esto es suficiente para que el loop sea imperceptible
   const duplicatedPartners = partners.length > 0 ? [...partners, ...partners] : [];
@@ -21,14 +28,14 @@ const InfiniteCarousel = () => {
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative">
+      <div className="relative z-10">
         {/* Title */}
         <div className="text-center mb-8 md:mb-12 px-4">
           <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold text-light-text-primary dark:text-dark-text-primary mb-3">
-            {t('collaborators.sectionTitle', 'Trabajamos con')}
+            {sectionTitle}
           </h3>
           <p className="text-base sm:text-lg text-light-text-secondary dark:text-dark-text-secondary mt-2">
-            {t('collaborators.sectionSubtitle', 'Nuestros colaboradores y aliados estratégicos')}
+            {sectionSubtitle}
           </p>
           <div className="w-24 sm:w-32 h-1.5 bg-gradient-to-r from-transparent via-accent to-transparent mx-auto mt-4" />
         </div>
