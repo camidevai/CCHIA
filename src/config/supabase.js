@@ -1,8 +1,30 @@
 import { createClient } from '@supabase/supabase-js';
 
 // Configuración de Supabase
-const supabaseUrl = 'https://uwaapfclxbmlnywhzzjc.supabase.co';
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV3YWFwZmNseGJtbG55d2h6empjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mzc0MTI4MDAsImV4cCI6MjA1Mjk4ODgwMH0.sb_publishable_E_oRF-hIm8v2je3svctYYg_TNx_BNGM';
+// OPCIÓN 1: Usar variables de entorno (RECOMENDADO)
+// Crea un archivo .env en la raíz del proyecto con:
+// VITE_SUPABASE_URL=https://uwaapfclxbmlnywhzzjc.supabase.co
+// VITE_SUPABASE_ANON_KEY=tu_anon_public_key_aqui
+
+// OPCIÓN 2: Hardcodear las credenciales aquí (solo para desarrollo)
+// Ve a: https://uwaapfclxbmlnywhzzjc.supabase.co → Project Settings → API
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://uwaapfclxbmlnywhzzjc.supabase.co';
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'REEMPLAZAR_CON_TU_ANON_KEY';
+
+// Validar que las credenciales estén configuradas
+if (!supabaseAnonKey || supabaseAnonKey === 'REEMPLAZAR_CON_TU_ANON_KEY') {
+  console.error('❌ ERROR: Supabase API key no configurada');
+  console.error('📝 Sigue estos pasos:');
+  console.error('1. Ve a: https://uwaapfclxbmlnywhzzjc.supabase.co');
+  console.error('2. Click en "Project Settings" (⚙️)');
+  console.error('3. Click en "API"');
+  console.error('4. Copia la "anon public" key');
+  console.error('5. Crea un archivo .env en la raíz con:');
+  console.error('   VITE_SUPABASE_URL=https://uwaapfclxbmlnywhzzjc.supabase.co');
+  console.error('   VITE_SUPABASE_ANON_KEY=tu_key_aqui');
+  console.error('6. Reinicia el servidor: npm run dev');
+}
 
 // Crear cliente de Supabase
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {

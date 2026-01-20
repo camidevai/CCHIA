@@ -4,7 +4,45 @@
 
 - **Nombre de Base de Datos**: CCHIA
 - **URL del Proyecto**: https://uwaapfclxbmlnywhzzjc.supabase.co
-- **API Key**: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...` (ya configurada)
+
+---
+
+## 🎯 Paso 0: Obtener las Credenciales de Supabase
+
+### **IMPORTANTE: Debes hacer esto PRIMERO**
+
+1. Ve a tu proyecto: https://uwaapfclxbmlnywhzzjc.supabase.co
+2. En el menú lateral, haz clic en **"Project Settings"** (ícono de engranaje ⚙️)
+3. Haz clic en **"API"** en el submenú
+4. Verás dos secciones:
+
+```
+Project URL:
+https://uwaapfclxbmlnywhzzjc.supabase.co
+
+API Keys:
+┌─────────────────────────────────────────────────────┐
+│ anon public                                         │
+│ eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOi... │
+│ [Copy] ← COPIA ESTA KEY                             │
+└─────────────────────────────────────────────────────┘
+```
+
+5. **Copia la "anon public" key** (haz clic en el botón "Copy")
+
+### **Crear archivo .env**
+
+6. En la raíz del proyecto, crea un archivo llamado `.env`
+7. Pega este contenido (reemplaza con tu key real):
+
+```env
+VITE_SUPABASE_URL=https://uwaapfclxbmlnywhzzjc.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.TU_KEY_REAL_AQUI
+```
+
+8. **Guarda el archivo**
+
+✅ **Listo!** Ahora las credenciales están configuradas.
 
 ---
 
