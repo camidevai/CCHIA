@@ -11,6 +11,7 @@ const EventsManagement = () => {
     date: '',
     description: '',
     photo: '',
+    registration_url: '',
   });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -23,6 +24,7 @@ const EventsManagement = () => {
       date: '',
       description: '',
       photo: '',
+      registration_url: '',
     });
     setEditingEvent(null);
     setError('');
@@ -37,6 +39,7 @@ const EventsManagement = () => {
         date: event.date,
         description: event.description,
         photo: event.photo || '',
+        registration_url: event.registration_url || 'https://www.google.cl',
       });
     } else {
       resetForm();
@@ -304,6 +307,25 @@ const EventsManagement = () => {
                     />
                     <p className="text-xs text-light-text-tertiary dark:text-dark-text-tertiary mt-1">
                       Opcional: URL de la imagen del evento
+                    </p>
+                  </div>
+
+                  {/* Registration URL */}
+                  <div>
+                    <label className="block text-sm font-semibold text-light-text-primary dark:text-dark-text-primary mb-2">
+                      URL de Inscripción *
+                    </label>
+                    <input
+                      type="url"
+                      name="registration_url"
+                      value={formData.registration_url}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-border-primary dark:border-dark-border-primary rounded-lg text-light-text-primary dark:text-dark-text-primary focus:outline-none focus:ring-2 focus:ring-secondary transition-all duration-300"
+                      placeholder="https://www.google.cl"
+                      required
+                    />
+                    <p className="text-xs text-light-text-tertiary dark:text-dark-text-tertiary mt-1">
+                      URL del formulario de inscripción al evento
                     </p>
                   </div>
 
