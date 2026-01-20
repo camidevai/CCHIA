@@ -14,9 +14,9 @@ const HomePage = () => {
     <Suspense fallback={<LoadingSpinner />}>
       <Hero />
       <Mission />
+       <InfiniteCarousel />
       <EventsCalendar />
       <Benefits />
-      <InfiniteCarousel />
       <CallToAction />
     </Suspense>
   );

@@ -19,8 +19,8 @@ const MatrixBackground = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Matrix characters
-    const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+    // Matrix characters - Solo 0 y 1 (código binario)
+    const chars = '01';
     const fontSize = 14;
     const columns = canvas.width / fontSize;
 
