@@ -5,7 +5,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useTheme } from '../contexts/ThemeContext';
 
 const AdminLogin = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -44,15 +44,17 @@ const AdminLogin = () => {
     setError('');
     setIsLoading(true);
 
-    // Simulate loading
-    await new Promise(resolve => setTimeout(resolve, 500));
+    try {
+      const success = await login(email, password);
 
-    const success = login(username, password);
-    
-    if (success) {
-      navigate('/admin/dashboard');
-    } else {
-      setError('Usuario o contraseña incorrectos');
+      if (success) {
+        navigate('/admin/dashboard');
+      } else {
+        setError('Email o contraseña incorrectos');
+        setIsLoading(false);
+      }
+    } catch (err) {
+      setError('Error al iniciar sesión. Verifica tus credenciales.');
       setIsLoading(false);
     }
   };
@@ -197,20 +199,20 @@ const AdminLogin = () => {
               </motion.div>
             )}
 
-            {/* Username field */}
+            {/* Email field */}
             <div>
-              <label htmlFor="username" className="block text-sm font-semibold text-light-text-primary dark:text-dark-text-primary mb-2">
-                Usuario
+              <label htmlFor="email" className="block text-sm font-semibold text-light-text-primary dark:text-dark-text-primary mb-2">
+                Email
               </label>
               <input
-                type="text"
-                id="username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
+                type="email"
+                id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full px-4 py-3 bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-border-primary dark:border-dark-border-primary rounded-lg text-light-text-primary dark:text-dark-text-primary placeholder-light-text-tertiary dark:placeholder-dark-text-tertiary focus:outline-none focus:ring-2 focus:ring-secondary focus:border-transparent transition-all duration-300"
-                placeholder="Ingrese su usuario"
+                placeholder="admin@cchia.cl"
                 required
-                autoComplete="username"
+                autoComplete="email"
               />
             </div>
 

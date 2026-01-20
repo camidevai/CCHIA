@@ -1,9 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { eventsAPI } from '../config/supabase';
 
 const EventsContext = createContext();
-
-// API Base URL
-const API_URL = 'http://localhost:3001/api/events';
 
 export const useEvents = () => {
   const context = useContext(EventsContext);
@@ -18,22 +16,18 @@ export const EventsProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Load events from API on mount
+  // Load events from Supabase on mount
   useEffect(() => {
     loadEvents();
   }, []);
 
-  // Load all events from API
+  // Load all events from Supabase
   const loadEvents = async () => {
     try {
       setIsLoading(true);
       setError(null);
-      const response = await fetch(API_URL);
-      if (!response.ok) {
-        throw new Error('Error loading events');
-      }
-      const data = await response.json();
-      setEvents(data);
+      const data = await eventsAPI.getAll();
+      setEvents(data || []);
     } catch (err) {
       console.error('Error loading events:', err);
       setError(err.message);
@@ -43,22 +37,10 @@ export const EventsProvider = ({ children }) => {
     }
   };
 
-  // Create a new event (POST to API)
+  // Create a new event (Supabase)
   const createEvent = async (eventData) => {
     try {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(eventData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error creating event');
-      }
-
-      const newEvent = await response.json();
+      const newEvent = await eventsAPI.create(eventData);
       setEvents((prevEvents) => [...prevEvents, newEvent]);
       return newEvent;
     } catch (err) {
@@ -67,22 +49,10 @@ export const EventsProvider = ({ children }) => {
     }
   };
 
-  // Update an existing event (PUT to API)
+  // Update an existing event (Supabase)
   const updateEvent = async (id, updatedData) => {
     try {
-      const response = await fetch(`${API_URL}/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(updatedData),
-      });
-
-      if (!response.ok) {
-        throw new Error('Error updating event');
-      }
-
-      const updatedEvent = await response.json();
+      const updatedEvent = await eventsAPI.update(id, updatedData);
       setEvents((prevEvents) =>
         prevEvents.map((event) => (event.id === id ? updatedEvent : event))
       );
@@ -93,17 +63,10 @@ export const EventsProvider = ({ children }) => {
     }
   };
 
-  // Delete an event (DELETE from API)
+  // Delete an event (Supabase)
   const deleteEvent = async (id) => {
     try {
-      const response = await fetch(`${API_URL}/${id}`, {
-        method: 'DELETE',
-      });
-
-      if (!response.ok) {
-        throw new Error('Error deleting event');
-      }
-
+      await eventsAPI.delete(id);
       setEvents((prevEvents) => prevEvents.filter((event) => event.id !== id));
       return true;
     } catch (err) {

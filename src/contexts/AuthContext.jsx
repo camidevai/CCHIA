@@ -1,55 +1,90 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import adminData from '../data/admin.json';
+import { authAPI, supabase } from '../config/supabase';
 
 const AuthContext = createContext(undefined);
 
 export const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem('cchia-admin-auth') === 'true';
-  });
-  
-  const [adminCredentials, setAdminCredentials] = useState(adminData.credentials);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  // Check for existing session on mount
   useEffect(() => {
-    localStorage.setItem('cchia-admin-auth', isAuthenticated);
-  }, [isAuthenticated]);
+    checkSession();
 
-  const login = (username, password) => {
-    if (username === adminCredentials.username && password === adminCredentials.password) {
+    // Listen for auth changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsAuthenticated(!!session);
+      setUser(session?.user || null);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const checkSession = async () => {
+    try {
+      const session = await authAPI.getSession();
+      setIsAuthenticated(!!session);
+      setUser(session?.user || null);
+    } catch (error) {
+      console.error('Error checking session:', error);
+      setIsAuthenticated(false);
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const login = async (email, password) => {
+    try {
+      const { user: authUser } = await authAPI.signIn(email, password);
       setIsAuthenticated(true);
+      setUser(authUser);
+
       // Update last login
       const now = new Date().toISOString();
       localStorage.setItem('cchia-admin-lastLogin', now);
+
       return true;
+    } catch (error) {
+      console.error('Login error:', error);
+      return false;
     }
-    return false;
   };
 
-  const logout = () => {
-    setIsAuthenticated(false);
-    localStorage.removeItem('cchia-admin-auth');
+  const logout = async () => {
+    try {
+      await authAPI.signOut();
+      setIsAuthenticated(false);
+      setUser(null);
+      localStorage.removeItem('cchia-admin-auth');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
   };
 
-  const changePassword = (currentPassword, newPassword) => {
-    if (currentPassword === adminCredentials.password) {
-      setAdminCredentials({
-        ...adminCredentials,
+  const changePassword = async (newPassword) => {
+    try {
+      const { error } = await supabase.auth.updateUser({
         password: newPassword,
       });
-      // In a real app, this would update the backend
-      localStorage.setItem('cchia-admin-password', newPassword);
-      localStorage.setItem('cchia-admin-passwordChanged', 'true');
+
+      if (error) throw error;
       return true;
+    } catch (error) {
+      console.error('Change password error:', error);
+      return false;
     }
-    return false;
   };
 
   const value = {
     isAuthenticated,
+    user,
+    loading,
     login,
     logout,
     changePassword,
-    username: adminCredentials.username,
+    username: user?.email || 'admin',
   };
 
   return (
