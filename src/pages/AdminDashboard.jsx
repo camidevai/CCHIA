@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '../contexts/AuthContext';
 import EventsManagement from '../components/EventsManagement';
+import PartnersManagement from '../components/PartnersManagement';
 
 const AdminDashboard = () => {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -223,6 +224,16 @@ const AdminDashboard = () => {
           className="mt-8 bg-light-bg-primary dark:bg-dark-bg-primary rounded-xl p-8 border border-light-border-primary dark:border-dark-border-primary shadow-lg"
         >
           <EventsManagement />
+        </motion.div>
+
+        {/* Partners Management Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+          className="mt-8 bg-light-bg-primary dark:bg-dark-bg-primary rounded-xl p-8 border border-light-border-primary dark:border-dark-border-primary shadow-lg"
+        >
+          <PartnersManagement />
         </motion.div>
 
         {/* Password Change Modal */}

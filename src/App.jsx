@@ -5,6 +5,7 @@ import { NavbarProvider, useNavbar } from './contexts/NavbarContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { EventsProvider } from './contexts/EventsContext';
+import { PartnersProvider } from './contexts/PartnersContext';
 import Navbar from './components/Navbar';
 import LoadingSpinner from './components/LoadingSpinner';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -81,9 +82,11 @@ function App() {
         <ThemeProvider>
           <AuthProvider>
             <EventsProvider>
-              <NavbarProvider>
-                <AppContent />
-              </NavbarProvider>
+              <PartnersProvider>
+                <NavbarProvider>
+                  <AppContent />
+                </NavbarProvider>
+              </PartnersProvider>
             </EventsProvider>
           </AuthProvider>
         </ThemeProvider>

@@ -117,7 +117,7 @@ const EventsCalendar = () => {
                   exit={{ opacity: 0, scale: 0.8, transition: { duration: 0.3 } }}
                   layout
                   whileHover={{ y: -10, scale: 1.02 }}
-                  className="group relative bg-light-bg-primary dark:bg-dark-bg-primary rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-light-border-primary dark:border-dark-border-primary"
+                  className="group relative bg-light-bg-primary dark:bg-dark-bg-primary rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-light-border-primary dark:border-dark-border-primary flex flex-col"
                 >
                 {/* Event Image */}
                 <div className="relative h-48 overflow-hidden">
@@ -138,7 +138,7 @@ const EventsCalendar = () => {
                 </div>
 
                 {/* Event Content */}
-                <div className="p-6">
+                <div className="p-6 flex-1 flex flex-col">
                   {/* Date */}
                   <div className="flex items-center gap-2 text-secondary dark:text-secondary-light mb-3">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -153,16 +153,16 @@ const EventsCalendar = () => {
                   </h3>
 
                   {/* Description */}
-                  <p className="text-light-text-secondary dark:text-dark-text-secondary text-sm leading-relaxed line-clamp-3 mb-4">
+                  <p className="text-light-text-secondary dark:text-dark-text-secondary text-sm leading-relaxed line-clamp-3 mb-4 flex-1">
                     {truncateText(event.description)}
                   </p>
 
-                  {/* Registration Button */}
+                  {/* Registration Button - Siempre al fondo */}
                   <a
                     href={event.registration_url || 'https://www.google.cl'}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-secondary to-secondary-light hover:from-secondary-light hover:to-secondary text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                    className="inline-flex items-center justify-center gap-2 w-full bg-gradient-to-r from-secondary to-secondary-light hover:from-secondary-light hover:to-secondary text-white font-semibold px-6 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl mt-auto"
                   >
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
