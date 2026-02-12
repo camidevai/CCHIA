@@ -196,6 +196,24 @@ const AdminDashboard = () => {
               </div>
             </motion.button>
 
+            {/* Manage Blog Button */}
+            <motion.button
+              onClick={() => navigate('/admin/cms')}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex items-center gap-4 p-6 bg-light-bg-secondary dark:bg-dark-bg-secondary border border-light-border-primary dark:border-dark-border-primary rounded-lg hover:border-secondary transition-all duration-300"
+            >
+              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                </svg>
+              </div>
+              <div className="text-left">
+                <h3 className="font-semibold text-lg text-light-text-primary dark:text-dark-text-primary">Gestionar Blog</h3>
+                <p className="text-sm text-light-text-secondary dark:text-dark-text-secondary">Crear y administrar contenido</p>
+              </div>
+            </motion.button>
+
             {/* Back to Home Button */}
             <motion.button
               onClick={() => navigate('/')}
