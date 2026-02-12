@@ -10,20 +10,32 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint .",
-    "check": "npm run lint && npm run build"
+    "check": "npm run lint && npm run build",
+    "prepare": "husky"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.90.1",
+    "dompurify": "^3.3.1",
     "framer-motion": "^11.0.0",
+    "marked": "^17.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-helmet-async": "^2.0.5",
     "react-intersection-observer": "^9.13.0",
     "react-router-dom": "^7.12.0",
     "react-slick": "^0.31.0",
     "slick-carousel": "^1.8.1"
   },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix"
+    ]
+  },
   "devDependencies": {
+    "@commitlint/cli": "^20.4.1",
+    "@commitlint/config-conventional": "^20.4.1",
     "@eslint/js": "^9.17.0",
+    "@tailwindcss/typography": "^0.5.19",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
@@ -34,6 +46,8 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7",
     "postcss": "^8.4.49",
     "tailwindcss": "^3.4.17",
     "vite": "^6.0.5"

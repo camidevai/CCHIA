@@ -15,7 +15,10 @@ const HomePage = lazy(() => import('./pages/HomePage'));
 const AdminLogin = lazy(() => import('./pages/AdminLogin'));
 const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
 const Footer = lazy(() => import('./components/Footer'));
+const BlogPage = lazy(() => import('./features/blog/pages/BlogPage'));
+const PostDetailPage = lazy(() => import('./features/blog/pages/PostDetailPage'));
 
+// eslint-disable-next-line react/prop-types
 const MainLayout = ({ children }) => {
   const { isNavExpanded } = useNavbar();
   const [isMobile, setIsMobile] = useState(false);
@@ -56,6 +59,24 @@ const AppContent = () => {
           element={
             <MainLayout>
               <HomePage />
+            </MainLayout>
+          }
+        />
+
+        {/* Blog routes */}
+        <Route
+          path="/blog"
+          element={
+            <MainLayout>
+              <BlogPage />
+            </MainLayout>
+          }
+        />
+        <Route
+          path="/blog/:slug"
+          element={
+            <MainLayout>
+              <PostDetailPage />
             </MainLayout>
           }
         />
