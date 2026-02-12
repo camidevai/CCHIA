@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTheme } from '../contexts/ThemeContext';
 import { useNavbar } from '../contexts/NavbarContext';
@@ -50,6 +51,16 @@ const EventsIcon = () => (
   </svg>
 );
 
+const BlogIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-6 h-6">
+    <path fill="#1FB6A6" d="M38,4H14c-2.2,0-4,1.8-4,4v4H8c-2.2,0-4,1.8-4,4v24c0,2.2,1.8,4,4,4h24c2.2,0,4-1.8,4-4v-2h2c2.2,0,4-1.8,4-4V8C42,5.8,40.2,4,38,4z"/>
+    <rect fill="#fff" x="8" y="16" width="24" height="24" rx="2"/>
+    <rect fill="#1FB6A6" x="12" y="20" width="16" height="2" rx="1"/>
+    <rect fill="#1FB6A6" x="12" y="26" width="12" height="2" rx="1"/>
+    <rect fill="#1FB6A6" x="12" y="32" width="14" height="2" rx="1"/>
+  </svg>
+);
+
 const ContactIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" className="w-6 h-6">
     <path fill="#1FB6A6" d="M40,8H8C5.8,8,4,9.8,4,12v24c0,2.2,1.8,4,4,4h32c2.2,0,4-1.8,4-4V12C44,9.8,42.2,8,40,8z"/>
@@ -63,6 +74,8 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { isNavExpanded, toggleNav } = useNavbar();
   const { theme } = useTheme();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -82,17 +95,32 @@ const Navbar = () => {
   const handleNavClick = (e, href) => {
     e.preventDefault();
     setIsMobileMenuOpen(false);
-    
+
+    if (href.startsWith('/')) {
+      navigate(href);
+      return;
+    }
+
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.querySelector(href);
+        if (element) {
+          const offset = 80;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+        }
+      }, 100);
+      return;
+    }
+
     const element = document.querySelector(href);
     if (element) {
       const offset = 80;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
     }
   };
 
@@ -152,6 +180,7 @@ const Navbar = () => {
                 <HomeIcon key="home" />,
                 <VisionIcon key="vision" />,
                 <EventsIcon key="events" />,
+                <BlogIcon key="blog" />,
                 <BenefitsIcon key="benefits" />,
                 <JoinIcon key="join" />,
                 <ContactIcon key="contact" />

@@ -13,6 +13,10 @@
       "href": "#eventos"
     },
     {
+      "name": "Blog",
+      "href": "/blog"
+    },
+    {
       "name": "Beneficios",
       "href": "#beneficios"
     },

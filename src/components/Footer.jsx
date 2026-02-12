@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useNavbar } from '../contexts/NavbarContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { useState, useEffect } from 'react';
@@ -12,6 +13,8 @@ const Footer = () => {
   const footerData = t('footer');
   const currentYear = new Date().getFullYear();
   const [isMobile, setIsMobile] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const checkMobile = () => {
@@ -26,18 +29,35 @@ const Footer = () => {
   const paddingLeft = isMobile ? '0' : (isNavExpanded ? '200px' : '80px');
 
   const handleNavClick = (e, href) => {
+    if (href.startsWith('/')) {
+      e.preventDefault();
+      navigate(href);
+      return;
+    }
+
     if (href.startsWith('#')) {
       e.preventDefault();
+
+      if (location.pathname !== '/') {
+        navigate('/');
+        setTimeout(() => {
+          const element = document.querySelector(href);
+          if (element) {
+            const offset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - offset;
+            window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
+          }
+        }, 100);
+        return;
+      }
+
       const element = document.querySelector(href);
       if (element) {
         const offset = 80;
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - offset;
-
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
       }
     }
   };
