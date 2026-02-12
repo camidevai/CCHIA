@@ -3,6 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { usePost } from '../hooks/usePost';
 import PostContent from '../components/PostContent';
+import SEOMeta from '../../../shared/components/SEOMeta';
+import ShareButtons from '../../../shared/components/ShareButtons';
+import { generateMeta, generateArticleJsonLD } from '../../../shared/lib/seo';
 
 const TYPE_LABELS = {
   article: 'Articulo',
@@ -37,9 +40,9 @@ const PostDetailPage = () => {
   if (error || !post) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center py-20 px-4">
-        <h2 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-4">
+        <h1 className="text-2xl font-bold text-light-text-primary dark:text-dark-text-primary mb-4">
           Post no encontrado
-        </h2>
+        </h1>
         <p className="text-light-text-secondary dark:text-dark-text-secondary mb-6">
           El articulo que buscas no existe o fue removido.
         </p>
@@ -59,8 +62,12 @@ const PostDetailPage = () => {
     day: 'numeric',
   });
 
+  const seoMeta = generateMeta(post);
+  const jsonLD = generateArticleJsonLD(post);
+
   return (
     <article className="min-h-screen">
+      <SEOMeta {...seoMeta} jsonLD={jsonLD} />
       {/* Hero with featured image */}
       <div className="relative h-64 md:h-96 overflow-hidden bg-light-bg-secondary dark:bg-dark-bg-secondary">
         {post.featured_image ? (
@@ -112,6 +119,11 @@ const PostDetailPage = () => {
 
           {/* Markdown body */}
           <PostContent content={post.body} />
+
+          {/* Share buttons */}
+          <div className="mt-8 pt-6 border-t border-light-border-primary dark:border-dark-border-primary">
+            <ShareButtons url={seoMeta.canonical} title={post.title} />
+          </div>
 
           {/* Download button for resources */}
           {post.type === 'resource' && post.file_url && (

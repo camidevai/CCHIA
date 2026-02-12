@@ -5,6 +5,7 @@ import { useCategories } from '../hooks/useCategories';
 import TypeTabs from '../components/TypeTabs';
 import CategoryFilter from '../components/CategoryFilter';
 import PostList from '../components/PostList';
+import SEOMeta from '../../../shared/components/SEOMeta';
 
 const BlogPage = () => {
   const {
@@ -24,6 +25,12 @@ const BlogPage = () => {
 
   return (
     <section className="min-h-screen py-20 px-4 sm:px-6 lg:px-8">
+      <SEOMeta
+        title="Blog"
+        description="Articulos, noticias y recursos sobre Inteligencia Artificial en Chile"
+        canonical="https://cchia.cl/blog"
+        ogType="website"
+      />
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div

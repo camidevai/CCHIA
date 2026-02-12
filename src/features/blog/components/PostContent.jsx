@@ -1,15 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useMemo } from 'react';
-import { marked } from 'marked';
-import DOMPurify from 'dompurify';
+import { renderMarkdown } from '../../../shared/lib/markdown';
 
 const PostContent = ({ content }) => {
   const sanitizedHtml = useMemo(() => {
     if (!content) return '';
-    const rawHtml = marked.parse(content);
-    return DOMPurify.sanitize(rawHtml, {
-      ADD_ATTR: ['target', 'rel'],
-    });
+    return renderMarkdown(content);
   }, [content]);
 
   return (
