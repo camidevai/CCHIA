@@ -18,6 +18,7 @@ const BlogEmptyState = ({ type }) => {
     >
       <div className="w-20 h-20 mb-6 rounded-full bg-light-bg-secondary dark:bg-dark-bg-secondary flex items-center justify-center">
         <svg
+          aria-hidden="true"
           className="w-10 h-10 text-light-text-tertiary dark:text-dark-text-tertiary"
           fill="none"
           viewBox="0 0 24 24"

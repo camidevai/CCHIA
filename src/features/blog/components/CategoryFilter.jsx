@@ -7,7 +7,7 @@ const CategoryFilter = ({ categories, activeCategory, onCategoryChange }) => {
       <button
         aria-pressed={!activeCategory}
         onClick={() => onCategoryChange(null)}
-        className={`px-4 py-1.5 text-sm font-medium rounded-full border-2 transition-all duration-200 ${
+        className={`px-4 py-1.5 text-sm font-medium rounded-full border-2 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-accent ${
           !activeCategory
             ? 'bg-accent text-white border-accent'
             : 'border-light-border-primary dark:border-dark-border-primary text-light-text-secondary dark:text-dark-text-secondary hover:border-accent hover:text-accent'
@@ -22,7 +22,7 @@ const CategoryFilter = ({ categories, activeCategory, onCategoryChange }) => {
             key={cat.id}
             aria-pressed={isActive}
             onClick={() => onCategoryChange(isActive ? null : cat.slug)}
-            className={`px-4 py-1.5 text-sm font-medium rounded-full border-2 transition-all duration-200 ${
+            className={`px-4 py-1.5 text-sm font-medium rounded-full border-2 transition-all duration-200 focus:outline-2 focus:outline-offset-2 focus:outline-accent ${
               isActive
                 ? 'bg-accent text-white border-accent'
                 : 'border-light-border-primary dark:border-dark-border-primary text-light-text-secondary dark:text-dark-text-secondary hover:border-accent hover:text-accent'

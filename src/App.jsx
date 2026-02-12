@@ -1,5 +1,6 @@
 import { lazy, Suspense, useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { NavbarProvider, useNavbar } from './contexts/NavbarContext';
 import { LanguageProvider } from './contexts/LanguageContext';
@@ -117,19 +118,21 @@ const AppContent = () => {
 function App() {
   return (
     <Router>
-      <LanguageProvider>
-        <ThemeProvider>
-          <AuthProvider>
-            <EventsProvider>
-              <PartnersProvider>
-                <NavbarProvider>
-                  <AppContent />
-                </NavbarProvider>
-              </PartnersProvider>
-            </EventsProvider>
-          </AuthProvider>
-        </ThemeProvider>
-      </LanguageProvider>
+      <HelmetProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <AuthProvider>
+              <EventsProvider>
+                <PartnersProvider>
+                  <NavbarProvider>
+                    <AppContent />
+                  </NavbarProvider>
+                </PartnersProvider>
+              </EventsProvider>
+            </AuthProvider>
+          </ThemeProvider>
+        </LanguageProvider>
+      </HelmetProvider>
     </Router>
   );
 }

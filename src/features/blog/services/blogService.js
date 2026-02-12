@@ -33,6 +33,7 @@ export const blogAPI = {
       .select(`
         id, slug, title, excerpt, body, type, status, featured,
         featured_image, file_url, file_name, published_at, author_id,
+        meta_title, meta_description, og_image,
         content_categories ( categories ( id, slug, name ) )
       `)
       .eq('slug', slug)
