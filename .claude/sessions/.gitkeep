@@ -1,0 +1,7 @@
+# Sessions
+
+Este directorio contiene el registro de cada ejecución de skill.
+
+Formato: `YYYY-MM-DD-{skill}-{contexto}.md`
+
+Ejemplo: `2024-01-27-brainstorm-auth.md`

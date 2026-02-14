@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(npm:*)",
+      "Bash(git:*)",
+      "Bash(cd:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)",
+      "WebSearch",
+      "Bash(grep:*)",
+      "Bash(README \")",
+      "Bash(head:*)",
+      "Bash(for skill in add-test audit brainstorming build-feature create-endpoint create-issues generate-component genesis merge promote qa react-best-practices release worktree)",
+      "Bash(do if [ -f \"F:\\\\New InformatiK-AI Framework \\(v11.0\\)\\\\.claude\\\\skills$skill\\\\SKILL.md\" ])",
+      "Bash(then echo \"✓ $skill\")",
+      "Bash(else echo \"✗ $skill\")",
+      "Bash(fi)",
+      "Bash(done)",
+      "Bash(while read f)",
+      "Bash(then echo \"$f\" fi done)",
+      "Bash(then)",
+      "Bash(echo:*)",
+      "Bash(while read ref)",
+      "Bash(do)",
+      "Bash(full_path=\"F:\\\\New InformatiK-AI Framework \\(v11.0\\)$ref\")",
+      "Bash(if [ ! -f \"$full_path\" ])",
+      "Bash(else)",
+      "Bash(test:*)",
+      "Bash(npx tsc:*)",
+      "Bash(./node_modules/.bin/tsc:*)",
+      "Bash(npx:*)",
+      "Bash(node -e:*)",
+      "Bash(supabase --version:*)",
+      "Bash(scoop:*)",
+      "Bash(powershell -Command \"Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression\")",
+      "Bash(powershell -Command:*)"
+    ]
+  }
+}

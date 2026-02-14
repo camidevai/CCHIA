@@ -1,0 +1,36 @@
+# Releases Directory
+
+Este directorio almacena la documentación de releases cuando se usa `backend=local`.
+
+Cada release genera un archivo `vX.Y.Z.md` con:
+- Changelog completo
+- Estadísticas del release
+- Commits incluidos
+- Contributors
+
+## Uso
+
+Cuando el proyecto usa GitHub (`backend=github`), los releases se publican
+en GitHub Releases y este directorio permanece vacío.
+
+Cuando el proyecto es local (`backend=local`), cada `/release` genera
+un archivo aquí con la documentación completa del release.
+
+## Formato de archivo
+
+```markdown
+# Release vX.Y.Z
+
+**Fecha:** YYYY-MM-DD
+**Commit:** abc1234
+**Tag:** vX.Y.Z
+
+## Changelog
+...
+
+## Estadísticas
+...
+
+## Contributors
+...
+```
